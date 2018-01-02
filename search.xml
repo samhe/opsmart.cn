@@ -3,35 +3,141 @@
   
     
     <entry>
-      <title><![CDATA[hello world]]></title>
-      <url>/2017/12/31/hello-world-1/</url>
-      <content type="html"><![CDATA[<h1 id="hellow-world"><a href="#hellow-world" class="headerlink" title="hellow world"></a>hellow world</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'hello world!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <title><![CDATA[回顾： 什么是敏捷 ？]]></title>
+      <url>/2018/01/02/agile-coach-summary/</url>
+      <content type="html"><![CDATA[<h2 id="敏捷训练的回顾"><a href="#敏捷训练的回顾" class="headerlink" title="敏捷训练的回顾"></a>敏捷训练的回顾</h2><h2 id="敏捷方法"><a href="#敏捷方法" class="headerlink" title="敏捷方法"></a>敏捷方法</h2><ul>
+<li>敏捷是一个什么样的方法论？</li>
+<li>敏捷的对象是什么？</li>
+<li>敏捷的目标是什么？</li>
+</ul>
+<h2 id="我的个人看法"><a href="#我的个人看法" class="headerlink" title="我的个人看法"></a>我的个人看法</h2>]]></content>
       
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> 敏捷 </tag>
+            
+        </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[Hexo Hints]]></title>
-      <url>/2017/03/04/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+      <title><![CDATA[如何定好Node.JS的后端程序]]></title>
+      <url>/2017/11/24/nodejs-refactoring/</url>
+      <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><h2 id="后端代码的层次"><a href="#后端代码的层次" class="headerlink" title="后端代码的层次"></a>后端代码的层次</h2><h2 id="Promise的处理手法"><a href="#Promise的处理手法" class="headerlink" title="Promise的处理手法"></a>Promise的处理手法</h2><h2 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h2>]]></content>
+      
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+            <category> Node.JS </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> Node.JS </tag>
+            
+            <tag> Refactoring </tag>
+            
+            <tag> Promise </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[如何成为一个敏捷教练]]></title>
+      <url>/2017/11/05/agile-coach-init/</url>
+      <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><h2 id="计划与想法"><a href="#计划与想法" class="headerlink" title="计划与想法"></a>计划与想法</h2>]]></content>
+      
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> 敏捷 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于API Management的一些想法]]></title>
+      <url>/2017/02/23/api-management-ideas/</url>
+      <content type="html"><![CDATA[<h2 id="API-Management产品必要的功能"><a href="#API-Management产品必要的功能" class="headerlink" title="API Management产品必要的功能"></a>API Management产品必要的功能</h2><p>最近由于工作的关系，试用了几款API Management的产品， 包括Tibco Mashery和MS Azure API Management。两款产品各有千秋，其中我觉得MS的设计的会科学一点。通常这样的的产品会包括以下功能:</p>
+<ul>
+<li>API Publisher<ul>
+<li>API的发布, <a href="https://swagger.io/" target="_blank" rel="noopener">swagger</a>是常用的方案</li>
+<li>API的package, 把业务相关的多个API组合成一个套餐，让用户subscribe</li>
+<li>访问量的定制，用户权限的管理</li>
+</ul>
+</li>
+<li>API Gateway<ul>
+<li>API的代理设置</li>
+<li>API的访问路径设</li>
+<li>API前后的data transformation配置</li>
+<li>API的访问验证机制，Access Key的来源位置设定，调用时的变量管理</li>
+<li>API调用时的一些定制化hooks配置</li>
+<li>API的访问量、响应时间、调用参数和结果的记录</li>
+</ul>
+</li>
+<li>API平台的监控<ul>
+<li>访问量统计</li>
+<li>响应时间统计, 包括：中间件、数据查询、数据转换分别损耗的时间 （目前还没发现外面的产品有这个颗粒度的统计）</li>
+<li>API和相应的package统计</li>
+<li>用户subscription的统计</li>
+</ul>
+</li>
+</ul>
+<p>我们团队也做了一个内部的API Management的项目，对比起来我觉得我们的项目可以有以下几点的优化：</p>
+<ol>
+<li>API的Acces Key最好跟API的业务参数分开，如：放到header里头；</li>
+<li>API的入口要尽量灵活，可定制化，像管理交通路线一样，有traffic route的概念；</li>
+<li>系统监控的指标要充足, 如：调用次数、调用结果、代理损耗时间、API管理记录等；</li>
+<li>最好提供OAuth的功能和数据存储的接口，让用户专注于做自己的数据处理和数据展现就好。</li>
+</ol>
+<h2 id="自己做，还是买现成的新产品？"><a href="#自己做，还是买现成的新产品？" class="headerlink" title="自己做，还是买现成的新产品？"></a>自己做，还是买现成的新产品？</h2><p>以上提到的两款产品，还有Google的<a href="http://apigee.com/" target="_blank" rel="noopener">Apigee</a>, 它们都能为企业快速搭建起API的平台 ，但价格都不菲，而且很庞大，还有一个关键的是性能。由于这些产品都给API的调用注入很多中间过程，如:权限认证、数据转换、使用量登记等，而且这些功能都是通用的，这些产品都期待用户不用写代码，而是直接在页面上拖、拉、拽来实现，这样很显示不是以性能优先的。我们曾经在一些测试场上粗略地测过经过中间件损耗的时间，发现有700ms~1秒左右的损耗，对响应时间要求高的API还是有点堪忧的。</p>
+<p>相比起直接买产品，我觉得自己做有以下优势：</p>
+<ul>
+<li>API的性能可以得到有效的控制和优化</li>
+<li>API的输入输出格式可以有效的统一控制</li>
+<li>回归需求，如果只是想有个统一平台来管理企业内部系统的接口，并且对性能又比较敏感的话，还是自己实现来得实在；重量级的API Management产品，感觉偏向于针对做一个多商户的系统接口接入平台，并且接口的数量和复杂度都不是一个团队所能控制的情况下所提供的解决方案。然而有多少企业有这样复杂的需求，愿意为这种方案买单呢？我目前还不清楚。我只是觉得这些核心的业务接口和API平台，自己设计并结合好业务的实际需求，更能发挥真正的价值。像国家物流平台，他们的目标也是做一个给多商户接入的API平台。设计得不错，他们也是自己实现了，没有借用外部的产品。而且我觉得自己的团队做一遍后，对公司的核心数据和接口都会有一个更清晰的认识，更值得这样的投资。</li>
+</ul>
+<h2 id="关于一些云存储和后台接口"><a href="#关于一些云存储和后台接口" class="headerlink" title="关于一些云存储和后台接口"></a>关于一些云存储和后台接口</h2><p>目前，我们项目中运用的API主要以数据查询为主，如果有需求的话，可以尝试加入数据增、删、改这些类型的API。最近发现<a href="https://leancloud.cn/" target="_blank" rel="noopener">Lean Cloud</a>，是个很有意思的云存储和接口平台, 它为移动开发提供方便的后端接口，是个很好的想法。我觉得如果API Management的产品往这个云存储的方向发展，也一定很有意思。</p>
 ]]></content>
       
         <categories>
             
             <category> 学习笔记 </category>
             
-            <category> test </category>
-            
         </categories>
         
+        
+        <tags>
+            
+            <tag> API Management </tag>
+            
+            <tag> API Cloud </tag>
+            
+        </tags>
         
     </entry>
     
