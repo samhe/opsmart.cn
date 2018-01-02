@@ -5,12 +5,47 @@
     <entry>
       <title><![CDATA[回顾： 什么是敏捷 ？]]></title>
       <url>/2018/01/02/agile-coach-summary/</url>
-      <content type="html"><![CDATA[<h2 id="敏捷训练的回顾"><a href="#敏捷训练的回顾" class="headerlink" title="敏捷训练的回顾"></a>敏捷训练的回顾</h2><h2 id="敏捷方法"><a href="#敏捷方法" class="headerlink" title="敏捷方法"></a>敏捷方法</h2><ul>
-<li>敏捷是一个什么样的方法论？</li>
-<li>敏捷的对象是什么？</li>
-<li>敏捷的目标是什么？</li>
+      <content type="html"><![CDATA[<h2 id="敏捷训练的回顾"><a href="#敏捷训练的回顾" class="headerlink" title="敏捷训练的回顾"></a>敏捷训练的回顾</h2><p>这两个月的学习, 除了看书和读书分享以外，还参与了很多ThoughtWorks同事的分享，如: 看板的方法、TDD,、DDD,、持续交付、重构、如何做一个教练、如何搜集和提供一个反馈等等。它们涵盖了方法论、技术的应用和管理、沟通的方法等。有他们丰富的经验和从旁点拨，让我刷新了很多认知，并让我对敏捷在项目中的应用有了更深的体会。</p>
+<p>学习的过程当然少不了实践。在每周的练习中，我一共完成了三个代码重构的视频，travis-ci在持续集成中的应用，Gilded Rose的TDD练习；还做了三次分享，包括整洁代码的读书分享， node.js项目代码的重构分享和以及GitLab和Docker在当前项目中的应用的分享。在公司的技术嘉年华中，我也担任后端会场的主持，负责收集话题以及协助分享者提升分享质量的工作。最后会场的分享圆满完成并得到许多积极的反馈。</p>
+<p>而让我觉得更大的成就感的是把学到的东西应用到项目组中。我的策略是根据team当前的项目情况和人员配置，抽取出几点能产生最大作用的敏捷实践逐步应用到项目中。我的顺序是在现有的看板管理上加入估点的步骤，然后借组内每周分享的机会，分享了番茄钟工作的方法和原理，并推荐引入到pair programing 中。接着，找到项目进度压力较小的一周，分享了node.js的重构视频，提升了组内人员对代码重构和TDD的理解和重视，并开始应用到项目开发中。目前我们项目中，新的需求都开始编写测试用例，并且所有项目都加入了CI和sonar scan的流程，团队成员不再只关注编写代码，还会关注CI的结果，代码质量的检测和环境的部署成败。再接着，我在组内开展正式的回顾会议，让每个人回顾项目实践中遇到的问题和总结改进的方法。会议中总结出来的待跟进的条目，都有相关的队员主动承担，使得工作的积极性进一步提升。现在组内除了每日站会外，每周都会展开需求讨论和组内分享，每个release都会展开retrospect. 相信只要继续坚持下去，我们定会变成一支成熟的敏捷团队，从容地面对各种变化和挑战。</p>
+<p>期待未来可以参与到更多的项目，与更多的团队成员去实践敏捷，学习和累积更多的项目经验。</p>
+<h2 id="敏捷方法"><a href="#敏捷方法" class="headerlink" title="敏捷方法"></a>敏捷方法</h2><p>当然，两个月的训练时间，对成为一个敏捷教练来说，实在太短了。我还有很多要学习、改进的地方，也需要很多实践的机会。不过，每个阶段都需要总结。学习到这个阶段，我不禁要回来头来，问一问自己一些问题：</p>
+<ul>
+<li>敏捷是一个什么样的方法论？<ul>
+<li>项目管理方法 ？</li>
+<li>开发的最佳实践 ？</li>
+<li>团队激励 ？</li>
 </ul>
-<h2 id="我的个人看法"><a href="#我的个人看法" class="headerlink" title="我的个人看法"></a>我的个人看法</h2>]]></content>
+</li>
+<li>敏捷的对象是什么？<ul>
+<li>项目管理 ？</li>
+<li>开发流程和方法 ？</li>
+<li>人 - 团队  ？</li>
+</ul>
+</li>
+<li>敏捷的目标是什么？<ul>
+<li>项目的顺利交付 ？</li>
+<li>高效的开发方法 ？</li>
+<li>团队的生存进化 ？</li>
+</ul>
+</li>
+</ul>
+<p>项目价值、技术的改进和团队的质量到底哪个是因哪个是果呢？</p>
+<h2 id="我的个人看法"><a href="#我的个人看法" class="headerlink" title="我的个人看法"></a>我的个人看法</h2><p>也许，不同的项目环境、不同的队员，它们的侧重点可以会不一样。但目前，我的理解，他们是有层次的：</p>
+<ol>
+<li>CI、重构、TDD、Scrum的流程等。它们都是为了给予团队一个容易理解、可供执行的规范；</li>
+<li>风险、价值的管理。以上的规范，只是为了让项目的进行得到有交的监控，平衡风险和投入，最大化地产生价值；</li>
+<li>团队的自管理 （包括对外的甲方， 对内的各个部门-BA, DEV, QA, OPC, 和 DEV等各个团队内部的不同人员）。最终，还是回归到“以人为本”上。无论方法和技术怎么地演变，最终人是最难把握的。我们既希望团队、系统都能像一个人那样会思考如果生存、如果进步，但我们又害怕把人聚集起来在一个体制中协作所引起的惰性和风险。所以，我们现在看到的方法论，不再条条框框那样定制好每一个规范，相反，而是把更多的重心放到人身上，包括：<ul>
+<li>满足人、激励人</li>
+<li>建立良好的工作习惯</li>
+<li>营造积极的氛围</li>
+<li>相互促进</li>
+<li>自管理</li>
+</ul>
+</li>
+</ol>
+<p>你会发现无论是敏捷、培训师、管理、DDD等流行的课程，它们都免不了说到如何激励人、怎么有同理心。这些都是期望把一个团队，变成像一个个体那样灵活地去思考和演进。当理解到这里，我发现很多技术和方法论，如：TDD、DDD、系统架构和敏捷管理，似乎背后有很多相关之处。期待未来有更多的发现！</p>
+]]></content>
       
         <categories>
             
@@ -32,7 +67,51 @@
     <entry>
       <title><![CDATA[如何定好Node.JS的后端程序]]></title>
       <url>/2017/11/24/nodejs-refactoring/</url>
-      <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><h2 id="后端代码的层次"><a href="#后端代码的层次" class="headerlink" title="后端代码的层次"></a>后端代码的层次</h2><h2 id="Promise的处理手法"><a href="#Promise的处理手法" class="headerlink" title="Promise的处理手法"></a>Promise的处理手法</h2><h2 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h2>]]></content>
+      <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
+<p>这个例子，以后台一个台风数据查询API的重构为例，给大家介绍写Node.JS项目时，非常需要注意的两个地方：代码的层次结构和Promise的处理手法。</p>
+<p>以下是原来的代码，它的业务过程大概是</p>
+<ol>
+<li>通过查询语句<code>latestBatchQuery</code>，拿到台风最新批次号的信息</li>
+<li>通过批次号查询台风相关的具体内容，包括：名字信息、路径信息和当前位置等。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  Typhoon.aggregate(latestBatchQuery).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestBatch error.'</span>, err);</span><br><span class="line">      <span class="keyword">return</span> res.json([]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">    <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">      <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">      Typhoon.aggregate(query).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, dataAggrResult</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'[Typhoon] dataAggregation error.'</span>, err);</span><br><span class="line">          <span class="keyword">return</span> res.json([]);</span><br><span class="line">        &#125;</span><br><span class="line">        res.json(dataAggrResult);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.json([]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="后端代码的层次"><a href="#后端代码的层次" class="headerlink" title="后端代码的层次"></a>后端代码的层次</h2><p>有时写业务的时候，我们就会贪方便，把业务逻辑一古脑全写在controller层里面。这样的做法其实很不好，一方面业务逻辑和http的req/res混在一起，代码不清晰，另一方面，测试的成本也高，每次跑测试必须把server和db都起起来。比较优雅的做法应该是：</p>
+<ul>
+<li>把业务逻辑所需要参数从httpr req 中剥离出来；</li>
+<li>把业务逻辑放到service层中，这样我们的测试用例可以只针对service里面的方法，代码的责任和层次就比较分明</li>
+</ul>
+<p>更改后，代码结构为：</p>
+<ul>
+<li><p>controller</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> returnResult = <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestBatch error.'</span>, err);</span><br><span class="line">      <span class="keyword">return</span> res.json([]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> res.json(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  TyphoonService.getTheLatestTyphoon(returnResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>service</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>(<span class="params">returnResult</span>) </span>&#123;</span><br><span class="line">  Typhoon.aggregate(latestBatchQuery).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      returnResult(err, []);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">    <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">      <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">      Typhoon.aggregate(query).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, dataAggrResult</span>) </span>&#123;</span><br><span class="line">        returnResult(err, dataAggrResult);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      returnResult(<span class="literal">null</span>, []);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Promise的处理手法"><a href="#Promise的处理手法" class="headerlink" title="Promise的处理手法"></a>Promise的处理手法</h2><p>JavaScript的回调地狱，也是让人生畏的地方，当遇到稍复杂的逻辑，那些层层套嵌的代码会让你看得没有明天。其实，很多手法可以让回调写得优雅。总体来说，有以下几个演化：</p>
+<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><p>使用promise chain,可以使DB查询（IO操作）用 <code>.then</code> / <code>.catch</code>的方法来继写, 如：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="function"><span class="keyword">function</span>(<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123; resolve([]); &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getTheLatestBatchs().then(getTheLatestTyphoonByBatchNos);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这样改后，逻辑变得清晰了，只是得把每个IO操作都写成一个方法，并且终须返回一个Promise对象。</p>
+<h3 id="借助ES6的新特性generator和第三方库CO"><a href="#借助ES6的新特性generator和第三方库CO" class="headerlink" title="借助ES6的新特性generator和第三方库CO"></a>借助ES6的新特性generator和第三方库CO</h3><p>借助ES6的generator特性和第三方包co，就可以使yield来调用异步函数，便其像写同步函数一样自然。最后，只需要用co包着一个generator函数，里面的异步方法就可以用try/catch包裹起来了，exception的处理也变得简单。</p>
+<ul>
+<li><p>controler</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">co(<span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      result = <span class="keyword">yield</span> TyphoonService.getTheLatestTyphoon();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestTyphoon error.'</span>, err);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      res.json(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>service</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">yield</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="function"><span class="keyword">function</span>* (<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">yield</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatchQueryResult = <span class="keyword">yield</span> getTheLatestBatchs();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">yield</span> getTheLatestTyphoonByBatchNos(latestBatchQueryResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ES7的async-await方式"><a href="#ES7的async-await方式" class="headerlink" title="ES7的async + await方式"></a>ES7的async + await方式</h3><p>如果你不想引用第三方的包，可以用async + await的方式，但这是ES7的特性，请务必使用足够高的node.js版本，或者使用babel来转换执行。这引改写后，感觉JavaScript就有点像JAVA了。:)</p>
+<ul>
+<li><p>controller</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    result = <span class="keyword">await</span> TyphoonService.getTheLatestTyphoon();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestTyphoon error.'</span>, error);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    res.json(result);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>service</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatchQueryResult = <span class="keyword">await</span> getTheLatestBatchs();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> getTheLatestTyphoonByBatchNos(latestBatchQueryResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="实例视频演示"><a href="#实例视频演示" class="headerlink" title="实例视频演示"></a>实例视频演示</h2><p>以下是完整的代码视频:</p>
+<iframe height="498" width="510" src="http://player.youku.com/embed/XMzE4MDQzOTA1Ng==" frameborder="0" 'allowfullscreen'=""></iframe>]]></content>
       
         <categories>
             
@@ -60,7 +139,93 @@
     <entry>
       <title><![CDATA[如何成为一个敏捷教练]]></title>
       <url>/2017/11/05/agile-coach-init/</url>
-      <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><h2 id="计划与想法"><a href="#计划与想法" class="headerlink" title="计划与想法"></a>计划与想法</h2>]]></content>
+      <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司全面普及敏捷，TDD、Pair Programing在各个部门兴起。这次普及力度实在够劲，还准备打造内部敏捷教练团队，我也成为了内部敏捷教练的培养对象。一时觉得压力山大，但又很有意思。一方面，是给自己的平时的项目工作来点不一样的刺激，另一方面，能够深入与外部敏捷咨询师的合作和学习，实在机会难得，是个很好的充电机会。</p>
+<h2 id="流程和目标"><a href="#流程和目标" class="headerlink" title="流程和目标"></a>流程和目标</h2><p>整个过程包括：看书、分享、练习、实践和答辩。总的目的是从全位培养你的敏捷相关的技能，包括：</p>
+<ul>
+<li>Scrum、Kanban，掌握Agile的概念、原则、价值及具体实践；</li>
+<li>技术实践，TDD、Pair Programing、Clean Code、重构的能力；</li>
+<li>业务能力，知道一些方法论，帮助团队扩大产品业务价值。</li>
+</ul>
+<p>而做为未来的内部教练，当然少不了一Coaching的技能，包括：引导能力，指导能力和演讲能力。</p>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>这么多的能力要培养，首先得看书补充知识。以下是对应相关能力培养的书单：</p>
+<ul>
+<li>构建知识体系的能力    <ul>
+<li>管理实践    <ul>
+<li>硝烟中的Scrum和XP★    <ul>
+<li>Agile    敏捷宣言★    <ul>
+<li>看板方法    </li>
+<li>敏捷估算与计划    </li>
+<li>Scrum精髓    </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>技术实践    <ul>
+<li>代码整洁之道★</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>重构-改善既有代码的设计★</li>
+<li>敏捷软件测试:测试人员与敏捷团队的实践指南</li>
+<li>敏捷软件开发原则、模式与实践</li>
+<li>编写可读代码的艺术</li>
+<li>Google软件测试之道</li>
+<li>持续交付：发布可靠软件的系统方法★</li>
+<li>修改代码的艺术★</li>
+<li>测试驱动开发★</li>
+<li>程序员的职业素养</li>
+<li>持续集成:软件质量改进和风险降低之道</li>
+<li>发布！软件的设计与部署</li>
+<li>领域驱动设计</li>
+<li>微服务设计</li>
+</ul>
+</li>
+<li>业务能力 <ul>
+<li>用户故事与敏捷方法★</li>
+<li>用户故事地图</li>
+<li>实例化需求</li>
+<li>Cucumber：行为驱动开发指南</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>教练能力<ul>
+<li>引导能力<ul>
+<li>学会提问</li>
+<li>敏捷教练：如何打造优秀的敏捷团队</li>
+<li>敏捷回顾：团队从优秀到卓越之道</li>
+<li>你的灯还亮着吗？</li>
+<li>如何构建敏捷项目管理团队</li>
+</ul>
+</li>
+<li>指导能力<ul>
+<li>关键对话</li>
+<li>卓有成效的管理者</li>
+<li>高效能人士的七个习惯</li>
+<li>罗伯特议事规则</li>
+</ul>
+</li>
+<li>转型能力<ul>
+<li>敏捷IT组织设计</li>
+<li>重新定义团队</li>
+<li>重新定义管理</li>
+<li>DevOps实践</li>
+<li>凤凰项目</li>
+</ul>
+</li>
+<li>演讲能力 <ul>
+<li>金字塔原理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>除了读书，当然少不了实践。我们的训练实践包括：每周读书分享、外部咨询师提供的相应课程、每周的编程作业以及工作项目中的实际应用（包括技术的引进和团队的合作方法改进）。</p>
+<h2 id="计划与想法"><a href="#计划与想法" class="headerlink" title="计划与想法"></a>计划与想法</h2><p>输出最是最好的验证输入的方法。我想把学习到的东西记录到笔记中，然后整理到博客上，这样就能很好的梳理学习的概念。另外，技术的学习最好的方法自然是动手写代码，我将在GitHub上建立代码库，把这次培训过程中用的的案例和作业都整理到上面，这样也是为日后的分享作素材储备。考虑到，我现在的项目主要以node.js居多，而训练中大多的例子都是JAVA为主，我打算建立两个代码库，先做完JAVA的做业，然后再自己寻找JavaScripts的例子，实践一遍。至于，在实际工作实践的话，那就相对简单了，我们团队每周都会组织内部分享。我只要把学到的东西整理好，在内部分享一次，这样既可以锻炼一下演讲能力，也可以收集同事给的反馈和建议，并落实到实际工作中。<br>为保证训练按部就班地进行，外部导师会协助我定制Coaching Kata，这也是一个很有效的手段，以后也可以应用到团队中。</p>
+]]></content>
       
         <categories>
             
