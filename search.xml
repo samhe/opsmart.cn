@@ -65,7 +65,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[如何定好Node.JS的后端程序]]></title>
+      <title><![CDATA[如何写好Node.JS的后端程序]]></title>
       <url>/2017/11/24/nodejs-refactoring/</url>
       <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
 <p>这个例子，以后台一个台风数据查询API的重构为例，给大家介绍写Node.JS项目时，非常需要注意的两个地方：代码的层次结构和Promise的处理手法。</p>
