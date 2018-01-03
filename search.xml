@@ -65,6 +65,102 @@
     </entry>
     
     <entry>
+      <title><![CDATA[用State模式的JAVA重构例子]]></title>
+      <url>/2017/12/15/java-refactoring-with-state-pattern/</url>
+      <content type="html"><![CDATA[<h2 id="State模式"><a href="#State模式" class="headerlink" title="State模式"></a>State模式</h2><p>State模式用于解决系统中复杂对象的状态转换以及不同状态下行为的封装问题。它的定义如下：</p>
+<p><code>状态模式(State Pattern)：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象(Objects for States)，状态模式是一种对象行为型模式。</code></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/de/7/70/StatePattern_Classdiagramm.png" alt="State Pattern"><br></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>它常应用于业务逻辑中有大量与对象状态有关的条件语句。如本例中的授权流程过程，它的流程如下：</p>
+<p><img src="/images/user-state.png" alt="用户授权流程"></p>
+<iframe height="498" width="510" src="http://player.youku.com/embed/XMzI0MjkyMDcyMA==" frameborder="0" 'allowfullscreen'=""></iframe>
+
+<p>视频实例的源码和每一步的commit可以参考<a href="https://github.com/samhe/refactoring_java/commits/system_permission" target="_blank" rel="noopener">这个分支的记录</a></p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li><p>主要优点</p>
+<ol>
+<li>封装了转换规则</li>
+<li>SRP, 可以让每个状态类专注于处理自己的转换逻辑</li>
+</ol>
+</li>
+<li><p>主要缺点</p>
+<ol>
+<li>状态模式的使用必然会增加系统类和对象的个数</li>
+<li>由于每个状态的逻辑都分散到类中，不易于对整体流程的逻辑理</li>
+<li>状态模式对”开闭原则”的支持并不太好，如果要新建一个状态的话，有可能需要修改分散在各个状态类中的逻辑。</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+            <category> Refactor </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> Refactor </tag>
+            
+            <tag> Coding </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[用Adapter模式的JAVA重构例子]]></title>
+      <url>/2017/12/03/java-refactoring-with-adapter-pattern/</url>
+      <content type="html"><![CDATA[<h2 id="Adapter模式"><a href="#Adapter模式" class="headerlink" title="Adapter模式"></a>Adapter模式</h2><p>适配器模式可以将一个类的接口和另一个类的接口匹配起来，而无须修改原来的适配者接口和抽象目标类接口。适配器模式定义如下：</p>
+<p><code>适配器模式(Adapter Pattern)：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</code></p>
+<p><img src="http://www.baluart.net/images/IntroduccinalospatronesdediseoconPHP_B770/adapterphp.jpg" alt="Adapter Pattern"><br></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>它常应用于适配第三方库的接口，从而实现不改动现在代码的情况下，实现一些算法或实现的转移。如本实例中，我们用Adapter模式重构XML Document的实现。</p>
+<iframe height="498" width="510" src="http://player.youku.com/embed/XMzIyNjIxMTA2OA==" frameborder="0" 'allowfullscreen'=""></iframe>
+
+<p>视频实例的源码和每一步的commit可以参考<a href="https://github.com/samhe/refactoring_java/commits/adapter.xml-v2" target="_blank" rel="noopener">这个分支的记录</a></p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li><p>主要优点</p>
+<ol>
+<li>可以把不同的实现适配到现有的系统中，而无须修改原来代码，增加透明性和复用性</li>
+<li>可以适配子类，避免继承</li>
+</ol>
+</li>
+<li><p>主要缺点</p>
+<ol>
+<li>需要完全了解适配者的实现和现有系统的实现的对应关系，当对应关系比较繁杂时，会使代码难以理解</li>
+<li>现在系统的现有接口不一定能完全适配适配者的实现，适配前可能需要做必要的重构，并且有可能会丧失一些有用的方法。如本例子中的<code>ElementAdapter.children</code>就没有在适配器中实现。</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+            <category> Refactor </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> Refactor </tag>
+            
+            <tag> Coding </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[如何写好Node.JS的后端程序]]></title>
       <url>/2017/11/24/nodejs-refactoring/</url>
       <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
@@ -131,6 +227,70 @@
             <tag> Refactoring </tag>
             
             <tag> Promise </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[读书笔记 - Clean Code 代码整洁之道]]></title>
+      <url>/2017/11/13/reading-clean-code/</url>
+      <content type="html"><![CDATA[<h2 id="何为整洁"><a href="#何为整洁" class="headerlink" title="何为整洁"></a>何为整洁</h2><p>书中一开头给出了很有趣的定义：WTFs/min. 即别人看你代码的时候，骂声的多少！:)</p>
+<p><img src="http://images.cryhavok.org/d/2471-1/WTFs+per+Minute.jpg" alt="WTFs/Min"></p>
+<p>所以，何为整洁？一言蔽之，高（效）可读！据统计，代码的读写比例在10:1，可见把代码写整洁，是在节省程序员的生命。好的代码可以自我描述，好的测试可以自证。然而，既然评价代码是否写得好是靠别人的WTFs/min，那是否就意味着这是主观的判断呢？就像诗人李白和杜甫都是写诗特牛逼的人，但他们都有各自的风格，如果有可能让他们“结队”诗，你觉得可能写好么？我觉得可以，但要给他们这样一个任务，如：合作写一首王维风格的诗。其实就是设定一些必要的规范。写程序，当然也有这样的规范。</p>
+<h2 id="Clean-Code的大致脉络"><a href="#Clean-Code的大致脉络" class="headerlink" title="Clean Code的大致脉络"></a>Clean Code的大致脉络</h2><p>我整理书中提到的建议大致如下：</p>
+<p><img src="/images/clean-code-rules.png" alt="Clean Code Rules"></p>
+<h2 id="如何实施"><a href="#如何实施" class="headerlink" title="如何实施"></a>如何实施</h2><p>我觉得简单的代码风格、函数复杂度的检查，可以借助工具，如： JAVA的check style, JavaScript的ESLint, SonarCube的代码检查等等。</p>
+<p>而代码的设计是不高效合理，没有帮得了你，只是靠体提高团队的意识。当然，我们还是有一些面向对象的设计原则可以参考的。如：</p>
+<ul>
+<li>里氏代换原则(Liskov Substitution Principle, LSP)</li>
+<li>开闭原则(Open-Closed Principle, OCP)</li>
+<li>接口隔离原则(Interface  Segregation Principle, ISP)<ul>
+<li>它们的目标是：方便扩展，避免重复</li>
+<li>通常的手法是： 增加、删除优于修改</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>单一职责原则</p>
+<ul>
+<li>一个类只负责一个功能领域中的相应职责，或者可以定义为：就一个类而言，应该只有一个引起它变化的原因。</li>
+<li>效果： 实现高内聚、低耦合的指导方针，它是最简单但又最难运用的原则</li>
+</ul>
+</li>
+<li><p>合成复用原则(Composition/Aggregate Reuse Principle, CARP)</p>
+<ul>
+<li>为了避免接口越来越大，难以维护</li>
+<li>引用好于继承</li>
+<li>Has-A v.s. Is-A</li>
+</ul>
+</li>
+<li><p>迪米特法则(Law of  Demeter, LoD)，也叫最少知识原则(LeastKnowledge Principle, LKP)</p>
+<ul>
+<li>限制软件实体之间通信的宽度和深度，它的目的是降低系统的耦合度，使类与类之间保持松散的耦合关系</li>
+<li>减少对象间的相互调用，可以通过引入一个合理的第三者来降低现有对象之间的耦合度。如引用<strong>中间协调类</strong>的办法来减少相互调用</li>
+</ul>
+</li>
+</ul>
+<p>看了那么多，我觉得或许可以用一条来验证代码是否足够整洁：当你要新加一个功能的时候，你看看是新建多，还是修改原文件多？然后，你就知道代码是否设计合理，是否需要重构了。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Agile Coach </category>
+            
+            <category> 读书笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Agile Coach </tag>
+            
+            <tag> Clean Code </tag>
+            
+            <tag> Reading </tag>
             
         </tags>
         

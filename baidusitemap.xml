@@ -4,6 +4,87 @@
 
     
   <url>
+    <loc>http://blog.opsmart.cn/2017/12/03/java-refactoring-with-adapter-pattern/</loc>
+    <lastmod>2018-01-03T09:09:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>用Adapter模式的JAVA重构例子</title>
+        <pubTime>2017-12-03T15:00:46.000Z</pubTime>
+        
+        <tag>Agile Coach</tag>
+         
+        <tag>Refactor</tag>
+         
+        <tag>Coding</tag>
+         
+         
+           
+             
+              <breadCrumb title="Agile Coach" url="http://blog.opsmart.cn/categories/Agile-Coach/"/>
+          
+             
+              <breadCrumb title="Refactor" url="http://blog.opsmart.cn/categories/Agile-Coach/Refactor/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.opsmart.cn/2017/12/15/java-refactoring-with-state-pattern/</loc>
+    <lastmod>2018-01-03T09:08:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>用State模式的JAVA重构例子</title>
+        <pubTime>2017-12-15T09:43:16.000Z</pubTime>
+        
+        <tag>Agile Coach</tag>
+         
+        <tag>Refactor</tag>
+         
+        <tag>Coding</tag>
+         
+         
+           
+             
+              <breadCrumb title="Agile Coach" url="http://blog.opsmart.cn/categories/Agile-Coach/"/>
+          
+             
+              <breadCrumb title="Refactor" url="http://blog.opsmart.cn/categories/Agile-Coach/Refactor/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.opsmart.cn/2017/11/13/reading-clean-code/</loc>
+    <lastmod>2018-01-03T08:12:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>读书笔记 - Clean Code 代码整洁之道</title>
+        <pubTime>2017-11-13T12:12:48.000Z</pubTime>
+        
+        <tag>Agile Coach</tag>
+         
+        <tag>Clean Code</tag>
+         
+        <tag>Reading</tag>
+         
+         
+           
+             
+              <breadCrumb title="Agile Coach" url="http://blog.opsmart.cn/categories/Agile-Coach/"/>
+          
+             
+              <breadCrumb title="读书笔记" url="http://blog.opsmart.cn/categories/Agile-Coach/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.opsmart.cn/2017/11/24/nodejs-refactoring/</loc>
     <lastmod>2018-01-02T17:21:58.000Z</lastmod>
     <data>
