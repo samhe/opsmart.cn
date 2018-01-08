@@ -25,6 +25,8 @@
 
 
 
+  <meta name="google-site-verification" content="bNOzyAEl_J5h9_E5Mal8U9VbeHYeJT8lIyrN33Y5-jc" />
+
 
 
 
@@ -81,18 +83,18 @@
 
 
 
-<meta name="description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例子">
+<meta name="description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例">
 <meta name="keywords" content="Agile Coach,Node.JS,Refactoring,Promise">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何写好Node.JS的后端程序">
 <meta property="og:url" content="http://blog.opsmart.cn/2017/11/24/nodejs-refactoring/index.html">
 <meta property="og:site_name" content="OpSmart">
-<meta property="og:description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例子">
+<meta property="og:description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-02T17:21:58.000Z">
+<meta property="og:updated_time" content="2018-01-08T15:29:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何写好Node.JS的后端程序">
-<meta name="twitter:description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例子">
+<meta name="twitter:description" content="背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例">
 
 
 
@@ -134,6 +136,25 @@
 
 
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-29240440-5', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1e6415cc20cde804e4fefb5e473b2d5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -415,7 +436,7 @@
       
 
       
-        <h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有OO思想的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
+        <h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
 <p>这个例子，以后台一个台风数据查询API的重构为例，给大家介绍写Node.JS项目时，非常需要注意的两个地方：代码的层次结构和Promise的处理手法。</p>
 <p>以下是原来的代码，它的业务过程大概是</p>
 <ol>
@@ -1391,6 +1412,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
