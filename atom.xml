@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.opsmart.cn/"/>
-  <updated>2018-01-14T08:17:14.000Z</updated>
+  <updated>2018-01-17T16:29:29.000Z</updated>
   <id>http://blog.opsmart.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>0基础用OpenCV做人脸识别示例</title>
+    <link href="http://blog.opsmart.cn/2018/01/16/opencv-samples/"/>
+    <id>http://blog.opsmart.cn/2018/01/16/opencv-samples/</id>
+    <published>2018-01-16T15:58:20.000Z</published>
+    <updated>2018-01-17T16:29:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近摸索了一下怎么做人脸识别，大家都说用OpenCV，懂python就可以写。好奇心驱使，尝试了一下，出奇地容易（里面的数学知识，不是一下就能弄懂的，但不妨碍做demo）。通常整理网上的一些样例，自己再调整一下程序框架，基本可以整个人脸识别的小玩具来在Mac Air上把玩。目前，可以实现：</p><ul><li>调用Mac Book Air的摄像头的画面</li><li>当发现有一个或多个人脸出现在摄像头区域，加入线框标记并在console上打印人脸在屏幕的坐标</li><li>当检测到有人脸出现于屏幕并且屏幕有较大变化时，截取屏幕图片</li><li>在程序退出时，把截取到的屏幕图片人脸抠出来保存</li></ul><p>以下是安装和运行过程的简要记录，程序源码记录在<a href="https://github.com/samhe/opencv-sample" target="_blank" rel="noopener">GitHub - opencv-sample</a>上，欢迎Fork或PR及提出宝贵意见。</p><h2 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h2><ul><li>Mac Book Air</li><li>Python3</li><li>OpenCV2</li></ul><h2 id="Folder-Structure"><a href="#Folder-Structure" class="headerlink" title="Folder Structure"></a>Folder Structure</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── cv-camera.py       #用opencv动态识别mac摄像头的数据，并在适当时候截图</span><br><span class="line">├── cv-image.py        #用opencv识别一个图片的人脸</span><br><span class="line">├── data               #从opencv上复制过来的特征数数</span><br><span class="line">├── images</span><br><span class="line">│   └── sample.jpeg    #cv-image.py 的默认识别样图片</span><br><span class="line">└── result             #ca-camera.py 的输出目录</span><br></pre></td></tr></table></figure><h2 id="Installations-for-Mac-only"><a href="#Installations-for-Mac-only" class="headerlink" title="Installations (for Mac only)"></a>Installations (for Mac only)</h2><ul><li>Ensure brew, xcode installed and update</li><li><p>Install the opencv by brew (最好翻墙后搞，会顺利点。)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> brew install opencv</span><br><span class="line">Updating Homebrew...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li><li><p>Verification</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> python3</span><br><span class="line">Python 3.6.4 (default, Jan  6 2018, 11:51:15)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import cv2</span><br></pre></td></tr></table></figure><blockquote><p>按理Brew应该会给python2和python3都安装opencv的库，但不知为什么我的mac安装后，只有python3管用。有经验的同学，麻烦指导一下</p></blockquote></li><li><p>Install the additional libs by pip</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure></li></ul><h2 id="Trail-run"><a href="#Trail-run" class="headerlink" title="Trail run"></a>Trail run</h2><ul><li><p>cv-image.py - detect the face from a image and draw the result in a new python window</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 cv-image.py</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> or you can specify a image you want</span><br><span class="line">python3 cv-image.py --image images/sample.jpeg</span><br></pre></td></tr></table></figure><ul><li>you can press any key to exits</li></ul><ul><li>sample result: <img src="/images/cv-image.png" alt="cv-image"></li></ul></li><li><p>cv-camera.py</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 cv-camera.py</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> this script will load the source from camera and detect the face real time</span><br></pre></td></tr></table></figure><ul><li>press ‘c’ to capture a image</li><li>press ‘q’ to exits</li><li>the program will capture max. 50 screen in the result folder, when it got new face detected or ‘c’ key press</li><li>when the program exists, it will detec the face of the screen captured in result folder and save the related faces in subfolder.</li></ul><ul><li>sample result: <img src="/images/cv-camera.png" alt="cv-camer"></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近摸索了一下怎么做人脸识别，大家都说用OpenCV，懂python就可以写。好奇心驱使，尝试了一下，出奇地容易（里面的数学知识，不是一下就能弄懂的，但不妨碍做demo）。通常整理网上的一些样例，自己再调整一下程序框架，基本可以整个人脸识别的小玩具来在Mac Air上把玩。
+      
+    
+    </summary>
+    
+      <category term="OpenCV" scheme="http://blog.opsmart.cn/categories/OpenCV/"/>
+    
+    
+      <category term="OpenCV" scheme="http://blog.opsmart.cn/tags/OpenCV/"/>
+    
+      <category term="Face Detection" scheme="http://blog.opsmart.cn/tags/Face-Detection/"/>
+    
+      <category term="Python" scheme="http://blog.opsmart.cn/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>回顾： 什么是敏捷</title>
