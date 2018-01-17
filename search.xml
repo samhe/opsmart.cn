@@ -1,547 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[0基础用OpenCV做人脸识别示例]]></title>
-      <url>/2018/01/16/opencv-samples/</url>
-      <content type="html"><![CDATA[<p>最近摸索了一下怎么做人脸识别，大家都说用OpenCV，懂python就可以写。好奇心驱使，尝试了一下，出奇地容易（里面的数学知识，不是一下就能弄懂的，但不妨碍做demo）。通常整理网上的一些样例，自己再调整一下程序框架，基本可以整个人脸识别的小玩具来在Mac Air上把玩。目前，可以实现：</p>
-<ul>
-<li>调用Mac Book Air的摄像头的画面</li>
-<li>当发现有一个或多个人脸出现在摄像头区域，加入线框标记并在console上打印人脸在屏幕的坐标</li>
-<li>当检测到有人脸出现于屏幕并且屏幕有较大变化时，截取屏幕图片</li>
-<li>在程序退出时，把截取到的屏幕图片人脸抠出来保存</li>
-</ul>
-<p>以下是安装和运行过程的简要记录，程序源码记录在<a href="https://github.com/samhe/opencv-sample" target="_blank" rel="noopener">GitHub - opencv-sample</a>上，欢迎Fork或PR及提出宝贵意见。</p>
-<h2 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h2><ul>
-<li>Mac Book Air</li>
-<li>Python3</li>
-<li>OpenCV2</li>
-</ul>
-<h2 id="Folder-Structure"><a href="#Folder-Structure" class="headerlink" title="Folder Structure"></a>Folder Structure</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── cv-camera.py       #用opencv动态识别mac摄像头的数据，并在适当时候截图</span><br><span class="line">├── cv-image.py        #用opencv识别一个图片的人脸</span><br><span class="line">├── data               #从opencv上复制过来的特征数数</span><br><span class="line">├── images</span><br><span class="line">│   └── sample.jpeg    #cv-image.py 的默认识别样图片</span><br><span class="line">└── result             #ca-camera.py 的输出目录</span><br></pre></td></tr></table></figure>
-<h2 id="Installations-for-Mac-only"><a href="#Installations-for-Mac-only" class="headerlink" title="Installations (for Mac only)"></a>Installations (for Mac only)</h2><ul>
-<li>Ensure brew, xcode installed and update</li>
-<li><p>Install the opencv by brew (最好翻墙后搞，会顺利点。)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> brew install opencv</span><br><span class="line">Updating Homebrew...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Verification</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> python3</span><br><span class="line">Python 3.6.4 (default, Jan  6 2018, 11:51:15)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import cv2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>按理Brew应该会给python2和python3都安装opencv的库，但不知为什么我的mac安装后，只有python3管用。有经验的同学，麻烦指导一下</p>
-</blockquote>
-</li>
-<li><p>Install the additional libs by pip</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Trail-run"><a href="#Trail-run" class="headerlink" title="Trail run"></a>Trail run</h2><ul>
-<li><p>cv-image.py - detect the face from a image and draw the result in a new python window</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 cv-image.py</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> or you can specify a image you want</span><br><span class="line">python3 cv-image.py --image images/sample.jpeg</span><br></pre></td></tr></table></figure>
-<ul>
-<li>you can press any key to exits</li>
-</ul>
-<ul>
-<li>sample result: <img src="/images/cv-image.png" alt="cv-image"></li>
-</ul>
-</li>
-<li><p>cv-camera.py</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 cv-camera.py</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> this script will load the source from camera and detect the face real time</span><br></pre></td></tr></table></figure>
-<ul>
-<li>press ‘c’ to capture a image</li>
-<li>press ‘q’ to exits</li>
-<li>the program will capture max. 50 screen in the result folder, when it got new face detected or ‘c’ key press</li>
-<li>when the program exists, it will detec the face of the screen captured in result folder and save the related faces in subfolder.</li>
-</ul>
-<ul>
-<li>sample result: <img src="/images/cv-camera.png" alt="cv-camer"></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> OpenCV </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> OpenCV </tag>
-            
-            <tag> Face Detection </tag>
-            
-            <tag> Python </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[回顾： 什么是敏捷]]></title>
-      <url>/2018/01/02/agile-coach-summary/</url>
-      <content type="html"><![CDATA[<h2 id="敏捷训练的回顾"><a href="#敏捷训练的回顾" class="headerlink" title="敏捷训练的回顾"></a>敏捷训练的回顾</h2><p>这两个月的学习, 除了看书和读书分享以外, 还参与了很多ThoughtWorks同事的分享. 如: 看板的方法, TDD, DDD, 持续交付, 重构, 如何做一个教练, 如何搜集和提供反馈等等。它们涵盖了方法论、技术的应用和管理、沟通的方法等。有他们丰富的经验和从旁点拨, 让我刷新了很多认知，并让我对敏捷在项目中的应用有了更深的体会。</p>
-<p>学习的过程当然少不了实践。在每周的练习中，我一共完成了三个代码重构的视频，travis-ci在持续集成中的应用，Gilded Rose的TDD练习；还做了三次分享，包括整洁代码的读书分享，node.js项目代码的重构分享和以及GitLab和Docker在当前项目中的应用的分享。在公司的技术嘉年华中，我也担任后端会场的主持，负责收集话题以及协助分享者提升分享质量的工作。最后会场的分享圆满完成并得到许多积极的反馈。</p>
-<p>而让我觉得更大成就感的是把学到的东西应用到项目组中。我的策略是根据team当前的项目情况和人员配置，抽取出几点能产生最大作用的敏捷实践逐步应用到项目中。我的顺序是在现有的看板管理上加入估点的步骤，然后借组内每周分享的机会，分享了番茄钟工作的方法和原理，并推荐引入到pair programing 中。接着，找到项目进度压力较小的一周，分享了node.js的重构视频，提升了组内人员对代码重构和TDD的理解和重视，并开始应用到项目开发中。目前我们项目中，新的需求都开始编写测试用例，并且所有项目都加入了CI和sonar scan的流程，团队成员不再只关注编写代码，还会关注CI的结果，代码质量的检测和环境的部署成败。再接着，我在组内开展正式的回顾会议，让每个人回顾项目实践中遇到的问题和总结改进的方法。会议中总结出来的待跟进的条目，都有相关的队员主动承担，使得工作的积极性进一步提升。现在组内除了每日站会外，每周都会展开需求讨论和组内分享，每个release都会展开retrospect. 相信只要继续坚持下去，我们定会变成一支成熟的敏捷团队，从容地面对各种变化和挑战。</p>
-<p>期待未来可以参与到更多的项目，与更多的团队成员去实践敏捷，学习和累积更多的项目经验。</p>
-<h2 id="敏捷方法"><a href="#敏捷方法" class="headerlink" title="敏捷方法"></a>敏捷方法</h2><p>当然，两个月的训练时间，对成为一个敏捷教练来说，实在太短了。我还有很多要学习、改进的地方，也需要很多实践的机会。不过，每个阶段都需要总结。学习到这个阶段，我不禁要回来头来，问一问自己一些问题：</p>
-<ul>
-<li>敏捷是一个什么样的方法论？<ul>
-<li>项目管理方法?</li>
-<li>开发的最佳实践?</li>
-<li>团队激励?</li>
-</ul>
-</li>
-<li>敏捷的对象是什么？<ul>
-<li>项目管理?</li>
-<li>开发流程和方法?</li>
-<li>人 - 团队?</li>
-</ul>
-</li>
-<li>敏捷的目标是什么？<ul>
-<li>项目的顺利交付?</li>
-<li>高效的开发方法?</li>
-<li>团队的生存进化?</li>
-</ul>
-</li>
-</ul>
-<p>项目价值、技术的改进和团队的质量到底哪个是因哪个是果呢？</p>
-<h2 id="我的个人看法"><a href="#我的个人看法" class="headerlink" title="我的个人看法"></a>我的个人看法</h2><p>也许，不同的项目环境、不同的队员，它们的侧重点可以会不一样。但目前，我的理解，他们是有层次的：</p>
-<ol>
-<li>CI、重构、TDD、Scrum的流程等。它们都是为了给予团队一个容易理解、可供执行的规范；</li>
-<li>风险、价值的管理。以上的规范，只是为了让项目的进行得到有交的监控，平衡风险和投入，最大化地产生价值；</li>
-<li>团队的自管理 （包括对外的甲方， 对内的各个部门-BA, DEV, QA, OPC, 和 DEV等各个团队内部的不同人员）。最终，还是回归到“以人为本”上。无论方法和技术怎么地演变，最终人是最难把握的。我们既希望团队、系统都能像一个人那样会思考如果生存、如果进步，但我们又害怕把人聚集起来在一个体制中协作所引起的惰性和风险。所以，我们现在看到的方法论，不再条条框框那样定制好每一个规范，相反，而是把更多的重心放到人身上，包括：<ul>
-<li>满足人、激励人</li>
-<li>建立良好的工作习惯</li>
-<li>营造积极的氛围</li>
-<li>相互促进</li>
-<li>自管理</li>
-</ul>
-</li>
-</ol>
-<p>你会发现无论是敏捷、培训师、管理、DDD等流行的课程，它们都免不了说到如何激励人、怎么有同理心。这些都是期望把一个团队，变成像一个个体那样灵活地去思考和演进。当理解到这里，我发现很多技术和方法论，如：TDD、DDD、系统架构和敏捷管理，似乎背后有很多相关之处。期待未来有更多的发现！</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> 敏捷 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[用State模式的JAVA重构例子]]></title>
-      <url>/2017/12/15/java-refactoring-with-state-pattern/</url>
-      <content type="html"><![CDATA[<h2 id="State模式"><a href="#State模式" class="headerlink" title="State模式"></a>State模式</h2><p>State模式用于解决系统中复杂对象的状态转换以及不同状态下行为的封装问题。它的定义如下：</p>
-<p><code>状态模式(State Pattern)：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象(Objects for States)，状态模式是一种对象行为型模式。</code></p>
-<p><img src="https://upload.wikimedia.org/wikipedia/de/7/70/StatePattern_Classdiagramm.png" alt="State Pattern"><br></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>它常应用于业务逻辑中有大量与对象状态有关的条件语句。如本例中的授权流程过程，它的流程如下：</p>
-<p><img src="/images/user-state.png" alt="用户授权流程"></p>
-<iframe height="498" width="510" src="http://player.youku.com/embed/XMzI0MjkyMDcyMA==" frameborder="0" 'allowfullscreen'=""></iframe>
-
-<p>视频实例的源码和每一步的commit可以参考<a href="https://github.com/samhe/refactoring_java/commits/system_permission" target="_blank" rel="noopener">这个分支的记录</a></p>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
-<li><p>主要优点</p>
-<ol>
-<li>封装了转换规则</li>
-<li>SRP, 可以让每个状态类专注于处理自己的转换逻辑</li>
-</ol>
-</li>
-<li><p>主要缺点</p>
-<ol>
-<li>状态模式的使用必然会增加系统类和对象的个数</li>
-<li>由于每个状态的逻辑都分散到类中，不易于对整体流程的逻辑理</li>
-<li>状态模式对”开闭原则”的支持并不太好，如果要新建一个状态的话，有可能需要修改分散在各个状态类中的逻辑。</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-            <category> Refactor </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> Refactor </tag>
-            
-            <tag> Coding </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[用Adapter模式的JAVA重构例子]]></title>
-      <url>/2017/12/03/java-refactoring-with-adapter-pattern/</url>
-      <content type="html"><![CDATA[<h2 id="Adapter模式"><a href="#Adapter模式" class="headerlink" title="Adapter模式"></a>Adapter模式</h2><p>适配器模式可以将一个类的接口和另一个类的接口匹配起来，而无须修改原来的适配者接口和抽象目标类接口。适配器模式定义如下：</p>
-<p><code>适配器模式(Adapter Pattern)：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</code></p>
-<p><img src="http://www.baluart.net/images/IntroduccinalospatronesdediseoconPHP_B770/adapterphp.jpg" alt="Adapter Pattern"><br></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>它常应用于适配第三方库的接口，从而实现不改动现在代码的情况下，实现一些算法或实现的转移。如本实例中，我们用Adapter模式重构XML Document的实现。</p>
-<iframe height="498" width="510" src="http://player.youku.com/embed/XMzIyNjIxMTA2OA==" frameborder="0" 'allowfullscreen'=""></iframe>
-
-<p>视频实例的源码和每一步的commit可以参考<a href="https://github.com/samhe/refactoring_java/commits/adapter.xml-v2" target="_blank" rel="noopener">这个分支的记录</a></p>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
-<li><p>主要优点</p>
-<ol>
-<li>可以把不同的实现适配到现有的系统中，而无须修改原来代码，增加透明性和复用性</li>
-<li>可以适配子类，避免继承</li>
-</ol>
-</li>
-<li><p>主要缺点</p>
-<ol>
-<li>需要完全了解适配者的实现和现有系统的实现的对应关系，当对应关系比较繁杂时，会使代码难以理解</li>
-<li>现在系统的现有接口不一定能完全适配适配者的实现，适配前可能需要做必要的重构，并且有可能会丧失一些有用的方法。如本例子中的<code>ElementAdapter.children</code>就没有在适配器中实现。</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-            <category> Refactor </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> Refactor </tag>
-            
-            <tag> Coding </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[如何写好Node.JS的后端程序]]></title>
-      <url>/2017/11/24/nodejs-refactoring/</url>
-      <content type="html"><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。</p>
-<p>这个例子，以后台一个台风数据查询API的重构为例，给大家介绍写Node.JS项目时，非常需要注意的两个地方：代码的层次结构和Promise的处理手法。</p>
-<p>以下是原来的代码，它的业务过程大概是</p>
-<ol>
-<li>通过查询语句<code>latestBatchQuery</code>，拿到台风最新批次号的信息</li>
-<li>通过批次号查询台风相关的具体内容，包括：名字信息、路径信息和当前位置等。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  Typhoon.aggregate(latestBatchQuery).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestBatch error.'</span>, err);</span><br><span class="line">      <span class="keyword">return</span> res.json([]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">    <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">      <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">      Typhoon.aggregate(query).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, dataAggrResult</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'[Typhoon] dataAggregation error.'</span>, err);</span><br><span class="line">          <span class="keyword">return</span> res.json([]);</span><br><span class="line">        &#125;</span><br><span class="line">        res.json(dataAggrResult);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.json([]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="后端代码的层次"><a href="#后端代码的层次" class="headerlink" title="后端代码的层次"></a>后端代码的层次</h2><p>有时写业务的时候，我们就会贪方便，把业务逻辑一古脑全写在controller层里面。这样的做法其实很不好，一方面业务逻辑和http的req/res混在一起，代码不清晰，另一方面，测试的成本也高，每次跑测试必须把server和db都起起来。比较优雅的做法应该是：</p>
-<ul>
-<li>把业务逻辑所需要参数从httpr req 中剥离出来；</li>
-<li>把业务逻辑放到service层中，这样我们的测试用例可以只针对service里面的方法，代码的责任和层次就比较分明</li>
-</ul>
-<p>更改后，代码结构为：</p>
-<ul>
-<li><p>controller</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> returnResult = <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestBatch error.'</span>, err);</span><br><span class="line">      <span class="keyword">return</span> res.json([]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> res.json(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  TyphoonService.getTheLatestTyphoon(returnResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>service</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>(<span class="params">returnResult</span>) </span>&#123;</span><br><span class="line">  Typhoon.aggregate(latestBatchQuery).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      returnResult(err, []);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">    <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">      <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">      Typhoon.aggregate(query).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, dataAggrResult</span>) </span>&#123;</span><br><span class="line">        returnResult(err, dataAggrResult);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      returnResult(<span class="literal">null</span>, []);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Promise的处理手法"><a href="#Promise的处理手法" class="headerlink" title="Promise的处理手法"></a>Promise的处理手法</h2><p>JavaScript的回调地狱，也是让人生畏的地方，当遇到稍复杂的逻辑，那些层层套嵌的代码会让你看得没有明天。其实，很多手法可以让回调写得优雅。总体来说，有以下几个演化：</p>
-<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><p>使用promise chain,可以使DB查询（IO操作）用 <code>.then</code> / <code>.catch</code>的方法来继写, 如：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="function"><span class="keyword">function</span>(<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123; resolve([]); &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getTheLatestBatchs().then(getTheLatestTyphoonByBatchNos);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这样改后，逻辑变得清晰了，只是得把每个IO操作都写成一个方法，并且终须返回一个Promise对象。</p>
-<h3 id="借助ES6的新特性generator和第三方库CO"><a href="#借助ES6的新特性generator和第三方库CO" class="headerlink" title="借助ES6的新特性generator和第三方库CO"></a>借助ES6的新特性generator和第三方库CO</h3><p>借助ES6的generator特性和第三方包co，就可以使yield来调用异步函数，便其像写同步函数一样自然。最后，只需要用co包着一个generator函数，里面的异步方法就可以用try/catch包裹起来了，exception的处理也变得简单。</p>
-<ul>
-<li><p>controler</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">co(<span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      result = <span class="keyword">yield</span> TyphoonService.getTheLatestTyphoon();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestTyphoon error.'</span>, err);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      res.json(result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>service</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">yield</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="function"><span class="keyword">function</span>* (<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">yield</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatchQueryResult = <span class="keyword">yield</span> getTheLatestBatchs();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">yield</span> getTheLatestTyphoonByBatchNos(latestBatchQueryResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="ES7的async-await方式"><a href="#ES7的async-await方式" class="headerlink" title="ES7的async + await方式"></a>ES7的async + await方式</h3><p>如果你不想引用第三方的包，可以用async + await的方式，但这是ES7的特性，请务必使用足够高的node.js版本，或者使用babel来转换执行。这引改写后，感觉JavaScript就有点像JAVA了。:)</p>
-<ul>
-<li><p>controller</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">exports.search = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    result = <span class="keyword">await</span> TyphoonService.getTheLatestTyphoon();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'[Typhoon] getLatestTyphoon error.'</span>, error);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    res.json(result);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>service</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestBatchs = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> Typhoon.aggregate(latestBatchQuery);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getTheLatestTyphoonByBatchNos = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">latestBatchQueryResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatches = _.get(latestBatchQueryResult[<span class="number">0</span>], <span class="string">'result'</span>);</span><br><span class="line">  <span class="keyword">if</span>(!_.isEmpty(latestBatches)) &#123;</span><br><span class="line">    <span class="keyword">let</span> query = getDataAggrQuery(latestBatches);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> Typhoon.aggregate(query);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.getTheLatestTyphoon = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> latestBatchQueryResult = <span class="keyword">await</span> getTheLatestBatchs();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> getTheLatestTyphoonByBatchNos(latestBatchQueryResult);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="实例视频演示"><a href="#实例视频演示" class="headerlink" title="实例视频演示"></a>实例视频演示</h2><p>以下是完整的代码视频:</p>
-<iframe height="498" width="510" src="http://player.youku.com/embed/XMzE4MDQzOTA1Ng==" frameborder="0" 'allowfullscreen'=""></iframe>]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-            <category> Node.JS </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> Node.JS </tag>
-            
-            <tag> Refactoring </tag>
-            
-            <tag> Promise </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[读书笔记 - Clean Code 代码整洁之道]]></title>
-      <url>/2017/11/13/reading-clean-code/</url>
-      <content type="html"><![CDATA[<h2 id="何为整洁"><a href="#何为整洁" class="headerlink" title="何为整洁"></a>何为整洁</h2><p>书中一开头给出了很有趣的定义：WTFs/min. 即别人看你代码的时候，骂声的多少！:)</p>
-<p><img src="http://images.cryhavok.org/d/2471-1/WTFs+per+Minute.jpg" alt="WTFs/Min"></p>
-<p>所以，何为整洁？一言蔽之，高（效）可读！据统计，代码的读写比例在10:1，可见把代码写整洁，是在节省程序员的生命。好的代码可以自我描述，好的测试可以自证。然而，既然评价代码是否写得好是靠别人的WTFs/min，那是否就意味着这是主观的判断呢？就像诗人李白和杜甫都是写诗特牛逼的人，但他们都有各自的风格，如果有可能让他们“结队”诗，你觉得可能写好么？我觉得可以，但要给他们这样一个任务，如：合作写一首王维风格的诗。其实就是设定一些必要的规范。写程序，当然也有这样的规范。</p>
-<h2 id="Clean-Code的大致脉络"><a href="#Clean-Code的大致脉络" class="headerlink" title="Clean Code的大致脉络"></a>Clean Code的大致脉络</h2><p>我整理书中提到的建议大致如下：</p>
-<p><img src="/images/clean-code-rules.png" alt="Clean Code Rules"></p>
-<h2 id="如何实施"><a href="#如何实施" class="headerlink" title="如何实施"></a>如何实施</h2><p>我觉得简单的代码风格、函数复杂度的检查，可以借助工具，如： JAVA的check style, JavaScript的ESLint, SonarCube的代码检查等等。</p>
-<p>而代码的设计是否高效合理，没有人帮得了你，只是靠体提高团队的意识。当然，我们还是有一些面向对象的设计原则可以参考的。如：</p>
-<ul>
-<li>里氏代换原则(Liskov Substitution Principle, LSP)</li>
-<li>开闭原则(Open-Closed Principle, OCP)</li>
-<li>接口隔离原则(Interface  Segregation Principle, ISP)<ul>
-<li>它们的目标是：方便扩展，避免重复</li>
-<li>通常的手法是： 增加、删除优于修改</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>单一职责原则</p>
-<ul>
-<li>一个类只负责一个功能领域中的相应职责，或者可以定义为：就一个类而言，应该只有一个引起它变化的原因。</li>
-<li>效果： 实现高内聚、低耦合的指导方针，它是最简单但又最难运用的原则</li>
-</ul>
-</li>
-<li><p>合成复用原则(Composition/Aggregate Reuse Principle, CARP)</p>
-<ul>
-<li>为了避免接口越来越大，难以维护</li>
-<li>引用好于继承</li>
-<li>Has-A v.s. Is-A</li>
-</ul>
-</li>
-<li><p>迪米特法则(Law of  Demeter, LoD)，也叫最少知识原则(LeastKnowledge Principle, LKP)</p>
-<ul>
-<li>限制软件实体之间通信的宽度和深度，它的目的是降低系统的耦合度，使类与类之间保持松散的耦合关系</li>
-<li>减少对象间的相互调用，可以通过引入一个合理的第三者来降低现有对象之间的耦合度。如引用<strong>中间协调类</strong>的办法来减少相互调用</li>
-</ul>
-</li>
-</ul>
-<p>看了那么多，我觉得或许可以用一条来验证代码是否足够整洁：当你要新加一个功能的时候，你看看代码是新建的多，还是修改原文件的多？这样，你就知道代码是否设计合理，是否需要重构了。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-            <category> 读书笔记 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> Clean Code </tag>
-            
-            <tag> Reading </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[如何成为一个敏捷教练]]></title>
-      <url>/2017/11/05/agile-coach-init/</url>
-      <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司全面普及敏捷，TDD、Pair Programing在各个部门兴起。这次普及力度实在够劲，还准备打造内部敏捷教练团队，我也成为了内部敏捷教练的培养对象。一时觉得压力山大，但又很有意思。一方面，是给自己的平时的项目工作来点不一样的刺激，另一方面，能够深入与外部敏捷咨询师的合作和学习，实在机会难得，是个很好的充电机会。</p>
-<h2 id="流程和目标"><a href="#流程和目标" class="headerlink" title="流程和目标"></a>流程和目标</h2><p>整个过程包括：看书、分享、练习、实践和答辩。总的目的是从全位培养你的敏捷相关的技能，包括：</p>
-<ul>
-<li>Scrum、Kanban，掌握Agile的概念、原则、价值及具体实践；</li>
-<li>技术实践，TDD、Pair Programing、Clean Code、重构的能力；</li>
-<li>业务能力，知道一些方法论，帮助团队扩大产品业务价值。</li>
-</ul>
-<p>而做为未来的内部教练，当然少不了一Coaching的技能，包括：引导能力，指导能力和演讲能力。</p>
-<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>这么多的能力要培养，首先得看书补充知识。以下是对应相关能力培养的书单：</p>
-<ul>
-<li>构建知识体系的能力    <ul>
-<li>管理实践    <ul>
-<li>硝烟中的Scrum和XP★    <ul>
-<li>Agile    敏捷宣言★    <ul>
-<li>看板方法    </li>
-<li>敏捷估算与计划    </li>
-<li>Scrum精髓    </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>技术实践    <ul>
-<li>代码整洁之道★</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>重构-改善既有代码的设计★</li>
-<li>敏捷软件测试:测试人员与敏捷团队的实践指南</li>
-<li>敏捷软件开发原则、模式与实践</li>
-<li>编写可读代码的艺术</li>
-<li>Google软件测试之道</li>
-<li>持续交付：发布可靠软件的系统方法★</li>
-<li>修改代码的艺术★</li>
-<li>测试驱动开发★</li>
-<li>程序员的职业素养</li>
-<li>持续集成:软件质量改进和风险降低之道</li>
-<li>发布！软件的设计与部署</li>
-<li>领域驱动设计</li>
-<li>微服务设计</li>
-</ul>
-</li>
-<li>业务能力 <ul>
-<li>用户故事与敏捷方法★</li>
-<li>用户故事地图</li>
-<li>实例化需求</li>
-<li>Cucumber：行为驱动开发指南</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>教练能力<ul>
-<li>引导能力<ul>
-<li>学会提问</li>
-<li>敏捷教练：如何打造优秀的敏捷团队</li>
-<li>敏捷回顾：团队从优秀到卓越之道</li>
-<li>你的灯还亮着吗？</li>
-<li>如何构建敏捷项目管理团队</li>
-</ul>
-</li>
-<li>指导能力<ul>
-<li>关键对话</li>
-<li>卓有成效的管理者</li>
-<li>高效能人士的七个习惯</li>
-<li>罗伯特议事规则</li>
-</ul>
-</li>
-<li>转型能力<ul>
-<li>敏捷IT组织设计</li>
-<li>重新定义团队</li>
-<li>重新定义管理</li>
-<li>DevOps实践</li>
-<li>凤凰项目</li>
-</ul>
-</li>
-<li>演讲能力 <ul>
-<li>金字塔原理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>除了读书，当然少不了实践。我们的训练实践包括：每周读书分享、外部咨询师提供的相应课程、每周的编程作业以及工作项目中的实际应用（包括技术的引进和团队的合作方法改进）。</p>
-<h2 id="计划与想法"><a href="#计划与想法" class="headerlink" title="计划与想法"></a>计划与想法</h2><p>输出是最好的验证输入的方法。我想把学习到的东西记录到笔记中，然后整理到博客上，这样就能很好的梳理学习到的概念。另外，技术的学习最好的方法自然是动手写代码，我将会在GitHub上建立代码库，把这次培训过程中用的的案例和作业都整理到上面，这样也是为日后的分享作素材储备。考虑到，我现在的项目主要以node.js居多，而训练中大多的例子都是JAVA为主，我打算建立两个代码库，先做完JAVA的做业，然后再自己寻找JavaScripts的例子，实践一遍。至于，在实际工作实践的话，那就相对简单了，我们团队每周都会组织内部分享。我只要把学到的东西整理好，在内部分享一次，这样既可以锻炼一下演讲能力，也可以收集同事给的反馈和建议，并落实到实际工作中。<br>为保证训练按部就班地进行，外部导师会协助我定制Coaching Kata，这也是一个很有效的手段，以后可以应用到团队中。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Agile Coach </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Agile Coach </tag>
-            
-            <tag> 敏捷 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[关于API Management的一些想法]]></title>
-      <url>/2017/02/23/api-management-ideas/</url>
-      <content type="html"><![CDATA[<h2 id="API-Management产品必要的功能"><a href="#API-Management产品必要的功能" class="headerlink" title="API Management产品必要的功能"></a>API Management产品必要的功能</h2><p>最近由于工作的关系，试用了几款API Management的产品， 包括Tibco Mashery和MS Azure API Management。两款产品各有千秋，其中我觉得MS的设计的会科学一点。通常这样的的产品会包括以下功能:</p>
-<ul>
-<li>API Publisher<ul>
-<li>API的发布, <a href="https://swagger.io/" target="_blank" rel="noopener">swagger</a>是常用的方案</li>
-<li>API的package, 把业务相关的多个API组合成一个套餐，让用户subscribe</li>
-<li>访问量的定制，用户权限的管理</li>
-</ul>
-</li>
-<li>API Gateway<ul>
-<li>API的代理设置</li>
-<li>API的访问路径设</li>
-<li>API前后的data transformation配置</li>
-<li>API的访问验证机制，Access Key的来源位置设定，调用时的变量管理</li>
-<li>API调用时的一些定制化hooks配置</li>
-<li>API的访问量、响应时间、调用参数和结果的记录</li>
-</ul>
-</li>
-<li>API平台的监控<ul>
-<li>访问量统计</li>
-<li>响应时间统计, 包括：中间件、数据查询、数据转换分别损耗的时间 （目前还没发现外面的产品有这个颗粒度的统计）</li>
-<li>API和相应的package统计</li>
-<li>用户subscription的统计</li>
-</ul>
-</li>
-</ul>
-<p>我们团队也做了一个内部的API Management的项目，对比起来我觉得我们的项目可以有以下几点的优化：</p>
-<ol>
-<li>API的Acces Key最好跟API的业务参数分开，如：放到header里头；</li>
-<li>API的入口要尽量灵活，可定制化，像管理交通路线一样，有traffic route的概念；</li>
-<li>系统监控的指标要充足, 如：调用次数、调用结果、代理损耗时间、API管理记录等；</li>
-<li>最好提供OAuth的功能和数据存储的接口，让用户专注于做自己的数据处理和数据展现就好。</li>
-</ol>
-<h2 id="自己做，还是买现成的新产品？"><a href="#自己做，还是买现成的新产品？" class="headerlink" title="自己做，还是买现成的新产品？"></a>自己做，还是买现成的新产品？</h2><p>以上提到的两款产品，还有Google的<a href="http://apigee.com/" target="_blank" rel="noopener">Apigee</a>, 它们都能为企业快速搭建起API的平台 ，但价格都不菲，而且很庞大，还有一个关键的是性能。由于这些产品都给API的调用注入很多中间过程，如:权限认证、数据转换、使用量登记等，而且这些功能都是通用的，这些产品都期待用户不用写代码，而是直接在页面上拖、拉、拽来实现，这样很显示不是以性能优先的。我们曾经在一些测试场上粗略地测过经过中间件损耗的时间，发现有700ms~1秒左右的损耗，对响应时间要求高的API还是有点堪忧的。</p>
-<p>相比起直接买产品，我觉得自己做有以下优势：</p>
-<ul>
-<li>API的性能可以得到有效的控制和优化</li>
-<li>API的输入输出格式可以有效的统一控制</li>
-<li>回归需求，如果只是想有个统一平台来管理企业内部系统的接口，并且对性能又比较敏感的话，还是自己实现来得实在；重量级的API Management产品，感觉偏向于针对做一个多商户的系统接口接入平台，并且接口的数量和复杂度都不是一个团队所能控制的情况下所提供的解决方案。然而有多少企业有这样复杂的需求，愿意为这种方案买单呢？我目前还不清楚。我只是觉得这些核心的业务接口和API平台，自己设计并结合好业务的实际需求，更能发挥真正的价值。像国家物流平台，他们的目标也是做一个给多商户接入的API平台。设计得不错，他们也是自己实现了，没有借用外部的产品。而且我觉得自己的团队做一遍后，对公司的核心数据和接口都会有一个更清晰的认识，更值得这样的投资。</li>
-</ul>
-<h2 id="关于一些云存储和后台接口"><a href="#关于一些云存储和后台接口" class="headerlink" title="关于一些云存储和后台接口"></a>关于一些云存储和后台接口</h2><p>目前，我们项目中运用的API主要以数据查询为主，如果有需求的话，可以尝试加入数据增、删、改这些类型的API。最近发现<a href="https://leancloud.cn/" target="_blank" rel="noopener">Lean Cloud</a>，是个很有意思的云存储和接口平台, 它为移动开发提供方便的后端接口，是个很好的想法。我觉得如果API Management的产品往这个云存储的方向发展，也一定很有意思。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 学习笔记 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> API Management </tag>
-            
-            <tag> API Cloud </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[0基础用OpenCV做人脸识别示例]]></title>
+    <url>%2F2018%2F01%2F16%2Fopencv-samples%2F</url>
+    <content type="text"><![CDATA[最近摸索了一下怎么做人脸识别，大家都说用OpenCV，懂python就可以写。好奇心驱使，尝试了一下，出奇地容易（里面的数学知识，不是一下就能弄懂的，但不妨碍做demo）。通常整理网上的一些样例，自己再调整一下程序框架，基本可以整个人脸识别的小玩具来在Mac Air上把玩。目前，可以实现： 调用Mac Book Air的摄像头的画面 当发现有一个或多个人脸出现在摄像头区域，加入线框标记并在console上打印人脸在屏幕的坐标 当检测到有人脸出现于屏幕并且屏幕有较大变化时，截取屏幕图片 在程序退出时，把截取到的屏幕图片人脸抠出来保存 以下是安装和运行过程的简要记录，程序源码记录在GitHub - opencv-sample上，欢迎Fork或PR及提出宝贵意见。 Environment Mac Book Air Python3 OpenCV2 Folder Structure123456├── cv-camera.py #用opencv动态识别mac摄像头的数据，并在适当时候截图├── cv-image.py #用opencv识别一个图片的人脸├── data #从opencv上复制过来的特征数数├── images│ └── sample.jpeg #cv-image.py 的默认识别样图片└── result #ca-camera.py 的输出目录 Installations (for Mac only) Ensure brew, xcode installed and update Install the opencv by brew (最好翻墙后搞，会顺利点。) 12345$ brew install opencvUpdating Homebrew............ Verification 12345$ python3Python 3.6.4 (default, Jan 6 2018, 11:51:15)[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)] on darwinType "help", "copyright", "credits" or "license" for more information.&gt;&gt;&gt; import cv2 按理Brew应该会给python2和python3都安装opencv的库，但不知为什么我的mac安装后，只有python3管用。有经验的同学，麻烦指导一下 Install the additional libs by pip 1pip3 install -r requirements.txt Trail run cv-image.py - detect the face from a image and draw the result in a new python window 1234python3 cv-image.py# or you can specify a image you wantpython3 cv-image.py --image images/sample.jpeg you can press any key to exits sample result: cv-camera.py 123python3 cv-camera.py# this script will load the source from camera and detect the face real time press ‘c’ to capture a image press ‘q’ to exits the program will capture max. 50 screen in the result folder, when it got new face detected or ‘c’ key press when the program exists, it will detec the face of the screen captured in result folder and save the related faces in subfolder. sample result:]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+        <tag>Face Detection</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[回顾： 什么是敏捷]]></title>
+    <url>%2F2018%2F01%2F02%2Fagile-coach-summary%2F</url>
+    <content type="text"><![CDATA[敏捷训练的回顾这两个月的学习, 除了看书和读书分享以外, 还参与了很多ThoughtWorks同事的分享. 如: 看板的方法, TDD, DDD, 持续交付, 重构, 如何做一个教练, 如何搜集和提供反馈等等。它们涵盖了方法论、技术的应用和管理、沟通的方法等。有他们丰富的经验和从旁点拨, 让我刷新了很多认知，并让我对敏捷在项目中的应用有了更深的体会。 学习的过程当然少不了实践。在每周的练习中，我一共完成了三个代码重构的视频，travis-ci在持续集成中的应用，Gilded Rose的TDD练习；还做了三次分享，包括整洁代码的读书分享，node.js项目代码的重构分享和以及GitLab和Docker在当前项目中的应用的分享。在公司的技术嘉年华中，我也担任后端会场的主持，负责收集话题以及协助分享者提升分享质量的工作。最后会场的分享圆满完成并得到许多积极的反馈。 而让我觉得更大成就感的是把学到的东西应用到项目组中。我的策略是根据team当前的项目情况和人员配置，抽取出几点能产生最大作用的敏捷实践逐步应用到项目中。我的顺序是在现有的看板管理上加入估点的步骤，然后借组内每周分享的机会，分享了番茄钟工作的方法和原理，并推荐引入到pair programing 中。接着，找到项目进度压力较小的一周，分享了node.js的重构视频，提升了组内人员对代码重构和TDD的理解和重视，并开始应用到项目开发中。目前我们项目中，新的需求都开始编写测试用例，并且所有项目都加入了CI和sonar scan的流程，团队成员不再只关注编写代码，还会关注CI的结果，代码质量的检测和环境的部署成败。再接着，我在组内开展正式的回顾会议，让每个人回顾项目实践中遇到的问题和总结改进的方法。会议中总结出来的待跟进的条目，都有相关的队员主动承担，使得工作的积极性进一步提升。现在组内除了每日站会外，每周都会展开需求讨论和组内分享，每个release都会展开retrospect. 相信只要继续坚持下去，我们定会变成一支成熟的敏捷团队，从容地面对各种变化和挑战。 期待未来可以参与到更多的项目，与更多的团队成员去实践敏捷，学习和累积更多的项目经验。 敏捷方法当然，两个月的训练时间，对成为一个敏捷教练来说，实在太短了。我还有很多要学习、改进的地方，也需要很多实践的机会。不过，每个阶段都需要总结。学习到这个阶段，我不禁要回来头来，问一问自己一些问题： 敏捷是一个什么样的方法论？ 项目管理方法? 开发的最佳实践? 团队激励? 敏捷的对象是什么？ 项目管理? 开发流程和方法? 人 - 团队? 敏捷的目标是什么？ 项目的顺利交付? 高效的开发方法? 团队的生存进化? 项目价值、技术的改进和团队的质量到底哪个是因哪个是果呢？ 我的个人看法也许，不同的项目环境、不同的队员，它们的侧重点可以会不一样。但目前，我的理解，他们是有层次的： CI、重构、TDD、Scrum的流程等。它们都是为了给予团队一个容易理解、可供执行的规范； 风险、价值的管理。以上的规范，只是为了让项目的进行得到有交的监控，平衡风险和投入，最大化地产生价值； 团队的自管理 （包括对外的甲方， 对内的各个部门-BA, DEV, QA, OPC, 和 DEV等各个团队内部的不同人员）。最终，还是回归到“以人为本”上。无论方法和技术怎么地演变，最终人是最难把握的。我们既希望团队、系统都能像一个人那样会思考如果生存、如果进步，但我们又害怕把人聚集起来在一个体制中协作所引起的惰性和风险。所以，我们现在看到的方法论，不再条条框框那样定制好每一个规范，相反，而是把更多的重心放到人身上，包括： 满足人、激励人 建立良好的工作习惯 营造积极的氛围 相互促进 自管理 你会发现无论是敏捷、培训师、管理、DDD等流行的课程，它们都免不了说到如何激励人、怎么有同理心。这些都是期望把一个团队，变成像一个个体那样灵活地去思考和演进。当理解到这里，我发现很多技术和方法论，如：TDD、DDD、系统架构和敏捷管理，似乎背后有很多相关之处。期待未来有更多的发现！]]></content>
+      <categories>
+        <category>Agile Coach</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>敏捷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[用State模式的JAVA重构例子]]></title>
+    <url>%2F2017%2F12%2F15%2Fjava-refactoring-with-state-pattern%2F</url>
+    <content type="text"><![CDATA[State模式State模式用于解决系统中复杂对象的状态转换以及不同状态下行为的封装问题。它的定义如下： 状态模式(State Pattern)：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象(Objects for States)，状态模式是一种对象行为型模式。  实例它常应用于业务逻辑中有大量与对象状态有关的条件语句。如本例中的授权流程过程，它的流程如下： 视频实例的源码和每一步的commit可以参考这个分支的记录 优缺点 主要优点 封装了转换规则 SRP, 可以让每个状态类专注于处理自己的转换逻辑 主要缺点 状态模式的使用必然会增加系统类和对象的个数 由于每个状态的逻辑都分散到类中，不易于对整体流程的逻辑理 状态模式对”开闭原则”的支持并不太好，如果要新建一个状态的话，有可能需要修改分散在各个状态类中的逻辑。]]></content>
+      <categories>
+        <category>Agile Coach</category>
+        <category>Refactor</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>Refactor</tag>
+        <tag>Coding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[用Adapter模式的JAVA重构例子]]></title>
+    <url>%2F2017%2F12%2F03%2Fjava-refactoring-with-adapter-pattern%2F</url>
+    <content type="text"><![CDATA[Adapter模式适配器模式可以将一个类的接口和另一个类的接口匹配起来，而无须修改原来的适配者接口和抽象目标类接口。适配器模式定义如下： 适配器模式(Adapter Pattern)：将一个接口转换成客户希望的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。  实例它常应用于适配第三方库的接口，从而实现不改动现在代码的情况下，实现一些算法或实现的转移。如本实例中，我们用Adapter模式重构XML Document的实现。 视频实例的源码和每一步的commit可以参考这个分支的记录 优缺点 主要优点 可以把不同的实现适配到现有的系统中，而无须修改原来代码，增加透明性和复用性 可以适配子类，避免继承 主要缺点 需要完全了解适配者的实现和现有系统的实现的对应关系，当对应关系比较繁杂时，会使代码难以理解 现在系统的现有接口不一定能完全适配适配者的实现，适配前可能需要做必要的重构，并且有可能会丧失一些有用的方法。如本例子中的ElementAdapter.children就没有在适配器中实现。]]></content>
+      <categories>
+        <category>Agile Coach</category>
+        <category>Refactor</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>Refactor</tag>
+        <tag>Coding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[如何写好Node.JS的后端程序]]></title>
+    <url>%2F2017%2F11%2F24%2Fnodejs-refactoring%2F</url>
+    <content type="text"><![CDATA[背景介绍大家知道，写Node.JS项目的代码都偏向于函数编程，直接上来就与业务代码，很少有以OO设计的代码。像什么新建一个类，再初始化一个对象，再调用它的方法，在JavaScript中似乎很冗余，我们直接上来就写action就是了哪有那么麻烦。然而，这样像写脚本似的方式，很容易让代码变得复杂难懂，等系统稍微复杂后就会变得难以维护。所以我们更需要在这些项目中重视Clean Code、重构。 这个例子，以后台一个台风数据查询API的重构为例，给大家介绍写Node.JS项目时，非常需要注意的两个地方：代码的层次结构和Promise的处理手法。 以下是原来的代码，它的业务过程大概是 通过查询语句latestBatchQuery，拿到台风最新批次号的信息 通过批次号查询台风相关的具体内容，包括：名字信息、路径信息和当前位置等。 123456789101112131415161718192021exports.search = function(req, res) &#123; Typhoon.aggregate(latestBatchQuery).exec(function(err, latestBatchQueryResult) &#123; if(err) &#123; console.log('[Typhoon] getLatestBatch error.', err); return res.json([]); &#125; let latestBatches = _.get(latestBatchQueryResult[0], 'result'); if(!_.isEmpty(latestBatches)) &#123; let query = getDataAggrQuery(latestBatches); Typhoon.aggregate(query).exec(function(err, dataAggrResult) &#123; if(err) &#123; console.log('[Typhoon] dataAggregation error.', err); return res.json([]); &#125; res.json(dataAggrResult); &#125;); &#125; else &#123; res.json([]); &#125; &#125;);&#125; 后端代码的层次有时写业务的时候，我们就会贪方便，把业务逻辑一古脑全写在controller层里面。这样的做法其实很不好，一方面业务逻辑和http的req/res混在一起，代码不清晰，另一方面，测试的成本也高，每次跑测试必须把server和db都起起来。比较优雅的做法应该是： 把业务逻辑所需要参数从httpr req 中剥离出来； 把业务逻辑放到service层中，这样我们的测试用例可以只针对service里面的方法，代码的责任和层次就比较分明 更改后，代码结构为： controller 1234567891011exports.search = function(req, res) &#123; let returnResult = function(err, result) &#123; if(err) &#123; console.log('[Typhoon] getLatestBatch error.', err); return res.json([]); &#125; else &#123; return res.json(result); &#125; &#125;; TyphoonService.getTheLatestTyphoon(returnResult);&#125;; service 12345678910111213141516exports.getTheLatestTyphoon = function(returnResult) &#123; Typhoon.aggregate(latestBatchQuery).exec(function(err, latestBatchQueryResult) &#123; if(err) &#123; returnResult(err, []); &#125; let latestBatches = _.get(latestBatchQueryResult[0], 'result'); if(!_.isEmpty(latestBatches)) &#123; let query = getDataAggrQuery(latestBatches); Typhoon.aggregate(query).exec(function(err, dataAggrResult) &#123; returnResult(err, dataAggrResult); &#125;); &#125; else &#123; returnResult(null, []); &#125; &#125;);&#125;; Promise的处理手法JavaScript的回调地狱，也是让人生畏的地方，当遇到稍复杂的逻辑，那些层层套嵌的代码会让你看得没有明天。其实，很多手法可以让回调写得优雅。总体来说，有以下几个演化： Promise Chain使用promise chain,可以使DB查询（IO操作）用 .then / .catch的方法来继写, 如： 1234567891011121314151617let getTheLatestBatchs = function() &#123; return Typhoon.aggregate(latestBatchQuery);&#125;;let getTheLatestTyphoonByBatchNos = function(latestBatchQueryResult) &#123; let latestBatches = _.get(latestBatchQueryResult[0], 'result'); if(!_.isEmpty(latestBatches)) &#123; let query = getDataAggrQuery(latestBatches); return Typhoon.aggregate(query); &#125; else &#123; return new Promise((resolve, reject) =&gt; &#123; resolve([]); &#125;); &#125;&#125;;exports.getTheLatestTyphoon = function() &#123; return getTheLatestBatchs().then(getTheLatestTyphoonByBatchNos);&#125;; 这样改后，逻辑变得清晰了，只是得把每个IO操作都写成一个方法，并且终须返回一个Promise对象。 借助ES6的新特性generator和第三方库CO借助ES6的generator特性和第三方包co，就可以使yield来调用异步函数，便其像写同步函数一样自然。最后，只需要用co包着一个generator函数，里面的异步方法就可以用try/catch包裹起来了，exception的处理也变得简单。 controler 12345678910co(function*() &#123; let result = []; try &#123; result = yield TyphoonService.getTheLatestTyphoon(); &#125; catch (error) &#123; console.log('[Typhoon] getLatestTyphoon error.', err); &#125; finally &#123; res.json(result); &#125; &#125;); service 123456789101112131415161718let getTheLatestBatchs = function* () &#123; return yield Typhoon.aggregate(latestBatchQuery);&#125;;let getTheLatestTyphoonByBatchNos = function* (latestBatchQueryResult) &#123; let latestBatches = _.get(latestBatchQueryResult[0], 'result'); if(!_.isEmpty(latestBatches)) &#123; let query = getDataAggrQuery(latestBatches); return yield Typhoon.aggregate(query); &#125; else &#123; return []; &#125;&#125;;exports.getTheLatestTyphoon = function* () &#123; let latestBatchQueryResult = yield getTheLatestBatchs(); return yield getTheLatestTyphoonByBatchNos(latestBatchQueryResult);&#125;; ES7的async + await方式如果你不想引用第三方的包，可以用async + await的方式，但这是ES7的特性，请务必使用足够高的node.js版本，或者使用babel来转换执行。这引改写后，感觉JavaScript就有点像JAVA了。:) controller 12345678910exports.search = async function(req, res) &#123; let result = []; try &#123; result = await TyphoonService.getTheLatestTyphoon(); &#125; catch (error) &#123; console.log('[Typhoon] getLatestTyphoon error.', error); &#125; finally &#123; res.json(result); &#125;&#125;; service 12345678910111213141516171819let getTheLatestBatchs = async function() &#123; return await Typhoon.aggregate(latestBatchQuery);&#125;;let getTheLatestTyphoonByBatchNos = async function(latestBatchQueryResult) &#123; let latestBatches = _.get(latestBatchQueryResult[0], 'result'); if(!_.isEmpty(latestBatches)) &#123; let query = getDataAggrQuery(latestBatches); return await Typhoon.aggregate(query); &#125; else &#123; return []; &#125;&#125;;exports.getTheLatestTyphoon = async function() &#123; let latestBatchQueryResult = await getTheLatestBatchs(); return await getTheLatestTyphoonByBatchNos(latestBatchQueryResult);&#125;; 实例视频演示以下是完整的代码视频:]]></content>
+      <categories>
+        <category>Agile Coach</category>
+        <category>Node.JS</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>Node.JS</tag>
+        <tag>Refactoring</tag>
+        <tag>Promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读书笔记 - Clean Code 代码整洁之道]]></title>
+    <url>%2F2017%2F11%2F13%2Freading-clean-code%2F</url>
+    <content type="text"><![CDATA[何为整洁书中一开头给出了很有趣的定义：WTFs/min. 即别人看你代码的时候，骂声的多少！:) 所以，何为整洁？一言蔽之，高（效）可读！据统计，代码的读写比例在10:1，可见把代码写整洁，是在节省程序员的生命。好的代码可以自我描述，好的测试可以自证。然而，既然评价代码是否写得好是靠别人的WTFs/min，那是否就意味着这是主观的判断呢？就像诗人李白和杜甫都是写诗特牛逼的人，但他们都有各自的风格，如果有可能让他们“结队”诗，你觉得可能写好么？我觉得可以，但要给他们这样一个任务，如：合作写一首王维风格的诗。其实就是设定一些必要的规范。写程序，当然也有这样的规范。 Clean Code的大致脉络我整理书中提到的建议大致如下： 如何实施我觉得简单的代码风格、函数复杂度的检查，可以借助工具，如： JAVA的check style, JavaScript的ESLint, SonarCube的代码检查等等。 而代码的设计是否高效合理，没有人帮得了你，只是靠体提高团队的意识。当然，我们还是有一些面向对象的设计原则可以参考的。如： 里氏代换原则(Liskov Substitution Principle, LSP) 开闭原则(Open-Closed Principle, OCP) 接口隔离原则(Interface Segregation Principle, ISP) 它们的目标是：方便扩展，避免重复 通常的手法是： 增加、删除优于修改 单一职责原则 一个类只负责一个功能领域中的相应职责，或者可以定义为：就一个类而言，应该只有一个引起它变化的原因。 效果： 实现高内聚、低耦合的指导方针，它是最简单但又最难运用的原则 合成复用原则(Composition/Aggregate Reuse Principle, CARP) 为了避免接口越来越大，难以维护 引用好于继承 Has-A v.s. Is-A 迪米特法则(Law of Demeter, LoD)，也叫最少知识原则(LeastKnowledge Principle, LKP) 限制软件实体之间通信的宽度和深度，它的目的是降低系统的耦合度，使类与类之间保持松散的耦合关系 减少对象间的相互调用，可以通过引入一个合理的第三者来降低现有对象之间的耦合度。如引用中间协调类的办法来减少相互调用 看了那么多，我觉得或许可以用一条来验证代码是否足够整洁：当你要新加一个功能的时候，你看看代码是新建的多，还是修改原文件的多？这样，你就知道代码是否设计合理，是否需要重构了。]]></content>
+      <categories>
+        <category>Agile Coach</category>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>Clean Code</tag>
+        <tag>Reading</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[如何成为一个敏捷教练]]></title>
+    <url>%2F2017%2F11%2F05%2Fagile-coach-init%2F</url>
+    <content type="text"><![CDATA[背景公司全面普及敏捷，TDD、Pair Programing在各个部门兴起。这次普及力度实在够劲，还准备打造内部敏捷教练团队，我也成为了内部敏捷教练的培养对象。一时觉得压力山大，但又很有意思。一方面，是给自己的平时的项目工作来点不一样的刺激，另一方面，能够深入与外部敏捷咨询师的合作和学习，实在机会难得，是个很好的充电机会。 流程和目标整个过程包括：看书、分享、练习、实践和答辩。总的目的是从全位培养你的敏捷相关的技能，包括： Scrum、Kanban，掌握Agile的概念、原则、价值及具体实践； 技术实践，TDD、Pair Programing、Clean Code、重构的能力； 业务能力，知道一些方法论，帮助团队扩大产品业务价值。 而做为未来的内部教练，当然少不了一Coaching的技能，包括：引导能力，指导能力和演讲能力。 要求这么多的能力要培养，首先得看书补充知识。以下是对应相关能力培养的书单： 构建知识体系的能力 管理实践 硝烟中的Scrum和XP★ Agile 敏捷宣言★ 看板方法 敏捷估算与计划 Scrum精髓 技术实践 代码整洁之道★ 重构-改善既有代码的设计★ 敏捷软件测试:测试人员与敏捷团队的实践指南 敏捷软件开发原则、模式与实践 编写可读代码的艺术 Google软件测试之道 持续交付：发布可靠软件的系统方法★ 修改代码的艺术★ 测试驱动开发★ 程序员的职业素养 持续集成:软件质量改进和风险降低之道 发布！软件的设计与部署 领域驱动设计 微服务设计 业务能力 用户故事与敏捷方法★ 用户故事地图 实例化需求 Cucumber：行为驱动开发指南 教练能力 引导能力 学会提问 敏捷教练：如何打造优秀的敏捷团队 敏捷回顾：团队从优秀到卓越之道 你的灯还亮着吗？ 如何构建敏捷项目管理团队 指导能力 关键对话 卓有成效的管理者 高效能人士的七个习惯 罗伯特议事规则 转型能力 敏捷IT组织设计 重新定义团队 重新定义管理 DevOps实践 凤凰项目 演讲能力 金字塔原理 除了读书，当然少不了实践。我们的训练实践包括：每周读书分享、外部咨询师提供的相应课程、每周的编程作业以及工作项目中的实际应用（包括技术的引进和团队的合作方法改进）。 计划与想法输出是最好的验证输入的方法。我想把学习到的东西记录到笔记中，然后整理到博客上，这样就能很好的梳理学习到的概念。另外，技术的学习最好的方法自然是动手写代码，我将会在GitHub上建立代码库，把这次培训过程中用的的案例和作业都整理到上面，这样也是为日后的分享作素材储备。考虑到，我现在的项目主要以node.js居多，而训练中大多的例子都是JAVA为主，我打算建立两个代码库，先做完JAVA的做业，然后再自己寻找JavaScripts的例子，实践一遍。至于，在实际工作实践的话，那就相对简单了，我们团队每周都会组织内部分享。我只要把学到的东西整理好，在内部分享一次，这样既可以锻炼一下演讲能力，也可以收集同事给的反馈和建议，并落实到实际工作中。为保证训练按部就班地进行，外部导师会协助我定制Coaching Kata，这也是一个很有效的手段，以后可以应用到团队中。]]></content>
+      <categories>
+        <category>Agile Coach</category>
+      </categories>
+      <tags>
+        <tag>Agile Coach</tag>
+        <tag>敏捷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[关于API Management的一些想法]]></title>
+    <url>%2F2017%2F02%2F23%2Fapi-management-ideas%2F</url>
+    <content type="text"><![CDATA[API Management产品必要的功能最近由于工作的关系，试用了几款API Management的产品， 包括Tibco Mashery和MS Azure API Management。两款产品各有千秋，其中我觉得MS的设计的会科学一点。通常这样的的产品会包括以下功能: API Publisher API的发布, swagger是常用的方案 API的package, 把业务相关的多个API组合成一个套餐，让用户subscribe 访问量的定制，用户权限的管理 API Gateway API的代理设置 API的访问路径设 API前后的data transformation配置 API的访问验证机制，Access Key的来源位置设定，调用时的变量管理 API调用时的一些定制化hooks配置 API的访问量、响应时间、调用参数和结果的记录 API平台的监控 访问量统计 响应时间统计, 包括：中间件、数据查询、数据转换分别损耗的时间 （目前还没发现外面的产品有这个颗粒度的统计） API和相应的package统计 用户subscription的统计 我们团队也做了一个内部的API Management的项目，对比起来我觉得我们的项目可以有以下几点的优化： API的Acces Key最好跟API的业务参数分开，如：放到header里头； API的入口要尽量灵活，可定制化，像管理交通路线一样，有traffic route的概念； 系统监控的指标要充足, 如：调用次数、调用结果、代理损耗时间、API管理记录等； 最好提供OAuth的功能和数据存储的接口，让用户专注于做自己的数据处理和数据展现就好。 自己做，还是买现成的新产品？以上提到的两款产品，还有Google的Apigee, 它们都能为企业快速搭建起API的平台 ，但价格都不菲，而且很庞大，还有一个关键的是性能。由于这些产品都给API的调用注入很多中间过程，如:权限认证、数据转换、使用量登记等，而且这些功能都是通用的，这些产品都期待用户不用写代码，而是直接在页面上拖、拉、拽来实现，这样很显示不是以性能优先的。我们曾经在一些测试场上粗略地测过经过中间件损耗的时间，发现有700ms~1秒左右的损耗，对响应时间要求高的API还是有点堪忧的。 相比起直接买产品，我觉得自己做有以下优势： API的性能可以得到有效的控制和优化 API的输入输出格式可以有效的统一控制 回归需求，如果只是想有个统一平台来管理企业内部系统的接口，并且对性能又比较敏感的话，还是自己实现来得实在；重量级的API Management产品，感觉偏向于针对做一个多商户的系统接口接入平台，并且接口的数量和复杂度都不是一个团队所能控制的情况下所提供的解决方案。然而有多少企业有这样复杂的需求，愿意为这种方案买单呢？我目前还不清楚。我只是觉得这些核心的业务接口和API平台，自己设计并结合好业务的实际需求，更能发挥真正的价值。像国家物流平台，他们的目标也是做一个给多商户接入的API平台。设计得不错，他们也是自己实现了，没有借用外部的产品。而且我觉得自己的团队做一遍后，对公司的核心数据和接口都会有一个更清晰的认识，更值得这样的投资。 关于一些云存储和后台接口目前，我们项目中运用的API主要以数据查询为主，如果有需求的话，可以尝试加入数据增、删、改这些类型的API。最近发现Lean Cloud，是个很有意思的云存储和接口平台, 它为移动开发提供方便的后端接口，是个很好的想法。我觉得如果API Management的产品往这个云存储的方向发展，也一定很有意思。]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>API Management</tag>
+        <tag>API Cloud</tag>
+      </tags>
+  </entry>
 </search>
