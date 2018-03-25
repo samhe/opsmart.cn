@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.opsmart.cn/2018/01/02/agile-coach-summary/</loc>
+    
+    <lastmod>2018-03-25T08:50:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.opsmart.cn/2017/11/24/nodejs-refactoring/</loc>
+    
+    <lastmod>2018-03-25T08:44:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.opsmart.cn/2018/01/16/opencv-samples/</loc>
     
     <lastmod>2018-01-17T16:29:29.000Z</lastmod>
@@ -9,23 +23,9 @@
   </url>
   
   <url>
-    <loc>http://blog.opsmart.cn/2018/01/02/agile-coach-summary/</loc>
-    
-    <lastmod>2018-01-14T08:17:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.opsmart.cn/2017/11/05/agile-coach-init/</loc>
     
     <lastmod>2018-01-08T15:31:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.opsmart.cn/2017/11/24/nodejs-refactoring/</loc>
-    
-    <lastmod>2018-01-08T15:29:05.000Z</lastmod>
     
   </url>
   
