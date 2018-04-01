@@ -444,7 +444,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,152
+                  1,163
                 </span>
               
 
@@ -483,7 +483,7 @@
       
         
           
-            <p>在上一篇的中, 我用了OpencCV来获取摄像头的影像并识别出人脸。但其实也是侦测出人脸在画面中的位置，离真正的通过人脸识别出人的身份还差很远。接下来的几篇文章，我打算朝着这个牛逼哄哄的方向，继续努力，打造出一个智能机器人来完成整个人脸识别的流程，包括侦测、记录、识别、修改。</p>
+            <p>在上一篇的<a href="/2018/01/16/opencv-samples/" title="0基础用OpenCV做人脸识别示例">0基础用OpenCV做人脸识别示例</a>中, 我用了OpencCV来获取摄像头的影像并识别出人脸。但其实也是侦测出人脸在画面中的位置，离真正的通过人脸识别出人的身份还差很远。接下来的几篇文章，我打算朝着这个牛逼哄哄的方向，继续努力，打造出一个智能机器人来完成整个人脸识别的流程，包括侦测、记录、识别、修改。</p>
 <h2 id="face-recognition初识"><a href="#face-recognition初识" class="headerlink" title="face-recognition初识"></a>face-recognition初识</h2><p>自从第一眼看了<a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">face recognition</a>的介绍后，就感觉它的功能已经非常它逆天了。从其网上的例子可以了解到 ，其实人脸识别的建模已经有现成的了，可以直接拿来用；而相应侦测、识别、比较也已经有现成的API可以调用了，我们只要关注自己的业务实现就好。可以看一下它的官网的一个例子就知道人脸识别的开发有多方便：</p>
 <p><img src="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" alt="用face recognistion做实时人脸识别的例子" title="face recognistion范例"></p>
 <p>从<a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py" target="_blank" rel="noopener">这个例子的源码</a>, 我们可以知道，它的大概实现是：</p>
