@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>http://blog.opsmart.cn/2018/03/10/face-recognition-1-introduction/</loc>
+    <lastmod>2018-04-01T09:18:33.214Z</lastmod>
+    <data>
+        <display>
+        <title>制作简单有趣的人脸识别小助手（一） - 简介</title>
+        <pubTime>2018-03-10T05:58:20.000Z</pubTime>
+        
+        <tag>AI</tag>
+         
+        <tag>Face Recognition</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Face Recognition" url="http://blog.opsmart.cn/categories/Face-Recognition/"/>
+          
+             
+              <breadCrumb title="AI" url="http://blog.opsmart.cn/categories/Face-Recognition/AI/"/>
+          
+             
+              <breadCrumb title="Recognition" url="http://blog.opsmart.cn/categories/Face-Recognition/AI/Recognition/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.opsmart.cn/2018/01/02/agile-coach-summary/</loc>
     <lastmod>2018-03-25T08:50:43.000Z</lastmod>
     <data>
@@ -62,11 +92,11 @@
         <title>0基础用OpenCV做人脸识别示例</title>
         <pubTime>2018-01-16T15:58:20.000Z</pubTime>
         
+        <tag>Python</tag>
+         
         <tag>OpenCV</tag>
          
         <tag>Face Detection</tag>
-         
-        <tag>Python</tag>
          
          
            

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[制作简单有趣的人脸识别小助手（一） - 简介]]></title>
+    <url>%2F2018%2F03%2F10%2Fface-recognition-1-introduction%2F</url>
+    <content type="text"><![CDATA[在上一篇的中, 我用了OpencCV来获取摄像头的影像并识别出人脸。但其实也是侦测出人脸在画面中的位置，离真正的通过人脸识别出人的身份还差很远。接下来的几篇文章，我打算朝着这个牛逼哄哄的方向，继续努力，打造出一个智能机器人来完成整个人脸识别的流程，包括侦测、记录、识别、修改。 face-recognition初识自从第一眼看了face recognition的介绍后，就感觉它的功能已经非常它逆天了。从其网上的例子可以了解到 ，其实人脸识别的建模已经有现成的了，可以直接拿来用；而相应侦测、识别、比较也已经有现成的API可以调用了，我们只要关注自己的业务实现就好。可以看一下它的官网的一个例子就知道人脸识别的开发有多方便： 从这个例子的源码, 我们可以知道，它的大概实现是： 从表态图片中抽取好特征值，定义好相应的名字，构建一个矩阵变量来存储人脸库 针对摄像头的某些帧，识别其中人脸 拿实时识别出来的人脸特征值和人面库中的做比较，得到最接近的人脸名字 用cv2把人脸位置用一个方框框出来，并加上相应的名字标签 细心的朋友可能会注意到上面‘针对摄像头的某些帧’，为什么这么说？因为从范例的代码可以看到它不是每一帧都做人脸识别的，而是隔一帧做一次。我想是因为性能上考虑，避免画面卡顿，范例给我们示范了其中一种优化的方式。其实没有必要每一帧都做，对用户来说，也没影响，我改造后的程序是隔5帧才识别一次，对用户体验来说也没什么影响，而且出来的效果让人相框带有一种“吸附感”，感觉更真实。 问题与需求好了，刚上的范例已经完美地带我们进入人脸识别的开发领域。接下来，我们就要思考如何改造，让它变成一个简单有趣的玩具咯。我一开始就拿着示例按着自己的感觉乱改一通，发现还是有很多可以改进的地方的， 如： 人脸识别的精度太低了，代码的逻辑是在人脸库中轮询匹配到首个差距小于0.6的，出来的效果是，很容易把一张新脸蛋误认为是人脸库中的某人； 人脸库的数据来自于本地的静态图片，如果要加入新脸蛋，就必需要拍照、存放目录、改代码、重启程序，这样的用户体验太差了，根本不能吸引人玩； 还有是用户体验，我是用mac book来把玩的，相当于是用前置摄像头，这样跑起来的效果是看到左右手相反的，就是罗胖所谓的“别人眼中的你”，看起来很别扭。其实，这种场景应该显示为“照镜子”的效果会比较自然； 改造工作内容接着，我们把以上用户的问题拆解分类一下，转化成码农要干的事情(story)，可以按以下分类： 精度的提高 缩小特征比较的差距阀值 改进比较算法，在保障性能的前提下，应该比较更多的人脸，务求拿到最接近的一个 提高数据（人脸库）的维护效率 把人脸的特征值和人名关联并存储起来 当遇到未知人脸时，让用户可以即时录入 提升用户体验 支持镜面效果显示 显示匹配度 支持多用户识别和名字关联 代码优化 代码可读性太差了，有待重构和封装 提取重要配置参数，便于以后更好的测试、参数调试 OK，说了这么多，感觉自己不是在说人脸识别，而是在做需求分析。。。。哈哈！Anyway, 以上就是对这个人脸识别小助力打造的前期调研、需求分析和功能开发的拆解。在接下来的两篇文章，我会总结回顾我理想中的人脸识别玩具是怎么打造的。]]></content>
+      <categories>
+        <category>Face Recognition</category>
+        <category>AI</category>
+        <category>Recognition</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>Face Recognition</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[0基础用OpenCV做人脸识别示例]]></title>
     <url>%2F2018%2F01%2F16%2Fopencv-samples%2F</url>
     <content type="text"><![CDATA[最近摸索了一下怎么做人脸识别，大家都说用OpenCV，懂python就可以写。好奇心驱使，尝试了一下，出奇地容易（里面的数学知识，不是一下就能弄懂的，但不妨碍做demo）。通常整理网上的一些样例，自己再调整一下程序框架，基本可以整个人脸识别的小玩具来在Mac Air上把玩。目前，可以实现： 调用Mac Book Air的摄像头的画面 当发现有一个或多个人脸出现在摄像头区域，加入线框标记并在console上打印人脸在屏幕的坐标 当检测到有人脸出现于屏幕并且屏幕有较大变化时，截取屏幕图片 在程序退出时，把截取到的屏幕图片人脸抠出来保存 以下是安装和运行过程的简要记录，程序源码记录在GitHub - opencv-sample上，欢迎Fork或PR及提出宝贵意见。 Environment Mac Book Air Python3 OpenCV2 Folder Structure123456├── cv-camera.py #用opencv动态识别mac摄像头的数据，并在适当时候截图├── cv-image.py #用opencv识别一个图片的人脸├── data #从opencv上复制过来的特征数数├── images│ └── sample.jpeg #cv-image.py 的默认识别样图片└── result #ca-camera.py 的输出目录 Installations (for Mac only) Ensure brew, xcode installed and update Install the opencv by brew (最好翻墙后搞，会顺利点。) 12345$ brew install opencvUpdating Homebrew............ Verification 12345$ python3Python 3.6.4 (default, Jan 6 2018, 11:51:15)[GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)] on darwinType "help", "copyright", "credits" or "license" for more information.&gt;&gt;&gt; import cv2 按理Brew应该会给python2和python3都安装opencv的库，但不知为什么我的mac安装后，只有python3管用。有经验的同学，麻烦指导一下 Install the additional libs by pip 1pip3 install -r requirements.txt Trail run cv-image.py - detect the face from a image and draw the result in a new python window 1234python3 cv-image.py# or you can specify a image you wantpython3 cv-image.py --image images/sample.jpeg you can press any key to exits sample result: cv-camera.py 123python3 cv-camera.py# this script will load the source from camera and detect the face real time press ‘c’ to capture a image press ‘q’ to exits the program will capture max. 50 screen in the result folder, when it got new face detected or ‘c’ key press when the program exists, it will detec the face of the screen captured in result folder and save the related faces in subfolder. sample result:]]></content>
@@ -8,9 +23,9 @@
         <category>OpenCV</category>
       </categories>
       <tags>
+        <tag>Python</tag>
         <tag>OpenCV</tag>
         <tag>Face Detection</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
